@@ -1,0 +1,377 @@
+unit tTest_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Samples.Spin, Vcl.StdCtrls,
+  Vcl.ExtCtrls, dmEducation_u, Login_u, System.UITypes, Vcl.ComCtrls;
+
+type
+  TfrmtTest = class(TForm)
+    btnHelp: TButton;
+    btnHome: TButton;
+    pnlOptions: TPanel;
+    lblTitle: TLabel;
+    lblSubject: TLabel;
+    edtTitle: TEdit;
+    cmbSubjects: TComboBox;
+    lblQuestions: TLabel;
+    sedNumQ: TSpinEdit;
+    lblNumOptions: TLabel;
+    sedNumO: TSpinEdit;
+    lblTestCustomisation: TLabel;
+    pnlCreation: TPanel;
+    lblQuestion: TLabel;
+    edtQuestion: TEdit;
+    btnCreate: TButton;
+    btnNext: TButton;
+    lblCorrect: TLabel;
+    redhelp: TRichEdit;
+    btnUnderstood: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure btnCreateClick(Sender: TObject);
+    procedure btnNextClick(Sender: TObject);
+    procedure btnHomeClick(Sender: TObject);
+    procedure btnHelpClick(Sender: TObject);
+    procedure btnUnderstoodClick(Sender: TObject);
+  private
+    { Private declarations }
+    arrLabels : array[1..5] of TLabel;
+    arrEdits : array[1..5] of TEdit;
+    arrChecks : array[1..5] of TCheckbox;
+    iQ, iO, iCurrent : integer;
+    bIncomplete : boolean;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  frmtTest: TfrmtTest;
+
+implementation
+Uses
+ TeacherHome_u;
+
+{$R *.dfm}
+
+procedure TfrmtTest.btnCreateClick(Sender: TObject);
+var
+  i : Integer;
+  bFound : boolean;
+begin
+  with dmEducation do
+    begin
+      //Checks that a subject was selected for the test to fall under
+      if cmbSubjects.itemindex = -1 then
+        begin
+          showmessage('A subject must be selected for your test');
+          cmbSubjects.setfocus;
+          Exit;
+        end;
+      if edtTitle.text = '' then
+        begin
+          Showmessage('Please enter a title in the edit box above');
+          edtTitle.setfocus;
+          Exit;
+        end;
+      for i := 1 to Length(edtTitle.text) do
+        begin
+          if Charinset(edtTitle.text[i], ['\','/',':','*','?','"','<','>','|']) then
+            begin
+              showmessage('Your title can not contain the following characters: \/:*?"<>|');
+              edtTitle.setfocus;
+              Exit;
+            end;
+        end;
+
+
+
+      tblTests.open;
+      tblTests.first;
+      bFound := false;
+
+      //Loops through to check that there is no existing test with the entered title
+      while not(tblTests.eof) do
+        begin
+          if tblTests['Title'] = edtTitle.text then
+            begin
+              bFound := true;
+            end;
+          tbltests.next;
+        end;
+
+      if bFound then
+        begin  //If there is already a test with the title then displays error message
+          showmessage('There is already a test with this title, please enter a different title');
+          edtTitle.setFocus;
+          Exit;
+        end;
+    end;
+
+  bIncomplete := true; //For if the textfile is not finished and the form is closed
+
+  //switches to the panel where you can enter the questions and answers
+  pnlOptions.hide;
+  pnlCreation.show;
+  pnlCreation.enabled := true;
+
+  iQ := sedNumQ.value;  //Gets the number of questions the user will have to enter
+  iO := sedNumO.value;  //Gets the nubmer of options each question should have
+  iCurrent := 1;        //Sets the current question to 1
+
+  for i := 1 to iO do //Loops through and creates an interface for each answer the user will have to enter
+    begin
+      //Creates the objects
+      arrLabels[i] := TLabel.Create(pnlCreation);
+      arrEdits[i] := TEdit.Create(pnlCreation);
+      arrChecks[i] := TCheckBox.Create(pnlCreation);
+
+      //Assigns the properties of the objects that have been created
+      with arrEdits[i] do
+        begin
+          parent := pnlCreation;
+          Height := edtQuestion.height;
+          Width  := edtQuestion.width;
+          left := edtQuestion.left;
+          Top := edtQuestion.top + 50 * i;
+          maxLength := 150;
+        end;
+
+      with arrLabels[i] do
+        begin
+          parent := pnlCreation;
+          Height := lblQuestions.height;
+          Width  := lblQuestions.width;
+          left := lblQuestions.left;
+          Top := edtQuestion.top + 50 * i + 6;
+          font.color := clWindow;
+          Caption := 'Option ' + inttostr(i) + ':';
+        end;
+
+      with arrChecks[i] do
+        begin
+          parent := pnlCreation;
+          Caption := '';
+          Height := edtTitle.height;
+          Width := edtTitle.height;
+          left := edtTitle.left + edtTitle.width - 1;
+          Top := edtQuestion.top + 50 * i;
+          Checked := False;
+        end;
+    end;
+
+
+end;
+
+procedure TfrmtTest.btnHelpClick(Sender: TObject);
+begin
+  redHelp.show;
+  btnUnderstood.show;
+end;
+
+procedure TfrmtTest.btnHomeClick(Sender: TObject);
+var
+  i: Integer;
+begin
+
+
+  if bIncomplete then
+    begin //For if the user is in the middle of creating a test
+      if (messageDlg('Are you sure you would like to close this form? All progress you have made on your current test will be lost', MtConfirmation, [mbYes, mbNo], 0) = MrYes) then
+        begin
+          FrmTeacherHome.show;
+          frmtTest.hide;
+          for i := 1 to 5 do
+            begin
+              arrEdits[i].free;
+              arrLabels[i].free;
+              arrChecks[i].free;
+            end;
+          DeleteFile(edtTitle.text + '.txt');
+        end;
+
+    end
+    else
+    begin
+      frmTeacherHome.show;
+      frmtTest.hide;
+    end;
+end;
+
+procedure TfrmtTest.btnNextClick(Sender: TObject);
+var
+ i : integer;
+ tTest : textfile;
+ sCorrect, sPoints : string;
+ bValid, bPoints : boolean;
+begin
+    if edtQuestion.text = '' then
+      Begin
+        showmessage('Please enter a question');
+        edtQuestion.setfocus;
+        exit;
+      End;
+
+
+    BValid := False;
+    for i := 1 to iO do
+      begin
+        if arrChecks[i].Checked then
+          begin
+            bValid := true;
+          end;
+      end;
+
+    for i := 1 to iO do
+      begin
+        if arrEdits[i].text = '' then
+          begin
+            bValid := false;
+          end;
+      end;
+
+    if bValid = False then     //error message
+      begin
+        Showmessage('At least one option must be selected as correct, and all option must have text entered into them');
+        Exit;
+      end;
+
+      AssignFile(tTest, edtTitle.text + '.txt');
+      if fileExists(edtTitle.text + '.txt') then
+        begin   //If the file is already created then goes to the end
+          Append(tTest);
+        end
+        else
+        begin  //If the file has not yet been created then rewrites the file and writes a line containing the number of questions and answers for each question
+          rewrite(tTest);
+          writeln(tTest, inttoStr(iQ) + ',' + inttostr(iO));
+        end;
+
+      Writeln(tTest, edtQuestion.text);  //Writes the question
+      sCorrect := '';                   //Initialises the variable that says which are correct
+
+      for i := 1 to iO do   //Loops through each of the options for the question
+        begin
+          Writeln(tTest, arrEdits[i].Text); //Writes it to the file
+
+          if arrChecks[i].Checked then
+            Begin //If it is marked as correct then adds it to sCorrect
+             sCorrect := sCorrect + inttostr(i)+ ',' ;
+            End;
+        end;
+        Writeln(tTest, sCorrect);   //Once all the options have been written then writes which ones are correct
+
+
+      repeat     //Loop to get the number of points the current question is worth
+        bPoints := True;
+        //Gets number of points in inputbox
+        sPOints := InputBox('Enter the number of points this question is worth', 'Enter points (1-10):', '1');
+
+        if sPOints = '' then  //Checks that the user has entered something into the points inputbox
+          begin
+            bPOints := false;
+            showmessage('The entered value cannot be blank');
+          end;
+
+        for i := 1 to Length(sPoints) do   //Loops through each character
+          begin
+            if NOT(CharInSet(sPoints[i], ['0'..'9'])) AND (bPoints) then //Checks that each digit is a number
+              begin
+                bPoints := false;
+                showmessage('You must enter an integer value');
+              end;
+          end;
+
+        if ((strtoint(sPOInts) < 1) OR (strtoint(sPoints) > 10)) AND (bPOints) then //Chedccks that the value is between one and ten
+          begin
+            bPoints := false;
+            showmessage('The number of points must be between one and ten');
+          end;
+      until (bPOints); //Loop ends once a valid integer has been entered
+
+      Writeln(tTest, sPoints);  //Writes the nubmer of points the question is worth to the text file
+
+      CloseFile(tTest);
+
+      inc(iCurrent);  //Sets the current question to the next one
+
+          //Resets the checkboxes and edit boxes
+   for i := 1 to iO do
+     begin
+       arrEdits[i].Text := '';
+       arrChecks[i].Checked := False;
+     end;
+   edtQuestion.Text := '';
+
+  if iCurrent > iQ then      //Checks if the current question is going less than the number of questions
+    begin
+     //If the last question has been done then writes the info about the textfile into the database
+     With dmEducation do
+      begin
+       tblTests.open;
+       tblTests.last;
+       tblTests.insert;
+       tblTests['Title'] := edtTitle.text;
+       tblTests['TeacherID'] := frmLogin.iUserNumber;
+       tblTests['SubjectID'] := cmbSubjects.Itemindex + 1;
+       tblTests['TextFile'] := edtTitle.text + '.txt';
+       tblTests.post;
+       bIncomplete := false;
+      end;
+
+      //Frees the dynamic objects
+      for i := 1 to iO do
+        begin
+          arrLabels[i].Free;
+          arrEdits[i].Free;
+          arrChecks[i].Free;
+        end;
+
+        //Goes back to pnlOptions and initialises the values in some components
+      pnlCreation.hide;
+      pnlOptions.show;
+      edtTitle.text := '';
+      cmbSubjects.Itemindex := -1;
+      sedNumQ.value := sedNumQ.MinValue;
+      sedNumO.value := sedNumO.MinValue;
+
+      showmessage('Test successfully created');
+    end;
+end;
+
+procedure TfrmtTest.btnUnderstoodClick(Sender: TObject);
+begin
+ redHelp.hide;
+ btnUnderstood.hide;
+end;
+
+procedure TfrmtTest.FormShow(Sender: TObject);
+begin
+  cmbSubjects.style := csDropDownList;
+  pnlCreation.hide;
+  pnlCreation.Enabled := false;
+  pnlOptions.show;
+  pnlOptions.enabled := True;
+
+  redHelp.hide;
+  redHelp.readonly := true;
+  btnUnderstood.hide;
+
+  bIncomplete := false;
+
+  with dmEducation do
+    begin
+      tblSubjects.open;
+      tblSubjects.first;
+      while not(tblSubjects.eof) do
+        begin
+          cmbSubjects.items.add(tblSubjects['SubjectName']);
+          tblSubjects.next;
+        end;
+      tblSubjects.close;
+    end;
+end;
+
+end.

@@ -1,0 +1,71 @@
+object frmViewStudents: TfrmViewStudents
+  Left = 329
+  Top = 185
+  Caption = 'View Students'
+  ClientHeight = 502
+  ClientWidth = 449
+  Color = 4667697
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblSelect: TLabel
+    Left = 10
+    Top = 35
+    Width = 120
+    Height = 13
+    Caption = 'Select a student to view:'
+    Color = 4733488
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object cmbStudent: TComboBox
+    Left = 152
+    Top = 32
+    Width = 289
+    Height = 21
+    TabOrder = 0
+    OnChange = cmbStudentChange
+  end
+  object redStudent: TRichEdit
+    Left = 8
+    Top = 59
+    Width = 433
+    Height = 435
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Zoom = 100
+  end
+  object btnHelp: TButton
+    Left = 366
+    Top = 6
+    Width = 75
+    Height = 25
+    Caption = 'Help'
+    TabOrder = 2
+  end
+  object btnHome: TButton
+    Left = 8
+    Top = 5
+    Width = 75
+    Height = 25
+    Caption = 'Home'
+    TabOrder = 3
+  end
+end

@@ -1,0 +1,168 @@
+unit sNotes_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  TfrmsNotes = class(TForm)
+    pnlSubsOrSearch: TPanel;
+    btnHome: TButton;
+    btnHelp: TButton;
+    lblSearch: TLabel;
+    edtSearch: TEdit;
+    lblSubjects: TLabel;
+    cmbSubjects: TComboBox;
+    Label2: TLabel;
+    pnlNotes: TPanel;
+    lblNotes: TLabel;
+    cmbNotes: TComboBox;
+    btnEnter: TButton;
+    btnOpen: TButton;
+    pnlNoteView: TPanel;
+    btnBack: TButton;
+    redNote: TRichEdit;
+    procedure FormShow(Sender: TObject);
+    procedure edtSearchEnter(Sender: TObject);
+    procedure btnEnterClick(Sender: TObject);
+    procedure cmbSubjectsChange(Sender: TObject);
+    procedure btnOpenClick(Sender: TObject);
+    procedure btnHomeClick(Sender: TObject);
+    procedure btnBackClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure DoNotes;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmsNotes: TfrmsNotes;
+
+implementation
+Uses
+ dmEducation_u, StudentHome_u;
+
+{$R *.dfm}
+
+
+procedure TfrmsNotes.btnBackClick(Sender: TObject);
+begin
+  pnlNoteView.hide;
+  pnlSubsOrSearch.show;
+  pnlNotes.show;
+end;
+
+procedure TfrmsNotes.btnEnterClick(Sender: TObject);
+begin
+  DoNotes;
+end;
+
+procedure TfrmsNotes.btnHomeClick(Sender: TObject);
+begin
+  frmsNotes.hide;
+  frmStudentHome.show;
+end;
+
+procedure TfrmsNotes.btnOpenClick(Sender: TObject);
+var
+ sLine : string;
+ bFound : boolean;
+ tNote : textfile;
+begin
+  pnlNoteview.visible := true;
+  pnlNoteview.bringtofront;
+  pnlSubsOrSearch.visible := false;
+  pnlNotes.visible := false;
+
+  with dmEducation do
+    begin
+      tblNotes.open;
+      tblNotes.first;
+      bFound := false;
+      while not(tblNotes.eof) AND not(bFound) do
+        begin
+          if tblNotes['Title'] = cmbNotes.items[cmbNotes.itemindex] then
+            begin
+              bFound := True;
+            end
+            else
+            begin
+              tblNotes.next;
+            end;
+        end;
+
+      AssignFile(tNote, tblNotes['TextFile']);
+      redNote.scrollbars := ssVertical;
+      reset(tNote);
+      while not(EOF(tNote)) do
+        begin
+          readln(tNote, sLine);
+          redNote.lines.add(sLine);
+        end;
+    end;
+end;
+
+procedure TfrmsNotes.cmbSubjectsChange(Sender: TObject);
+begin
+  DoNotes;
+end;
+
+procedure TfrmsNotes.DoNotes;
+begin
+  cmbNotes.items.clear;
+  with dmEducation do
+    begin
+      tblNotes.open;
+      tblNotes.first;
+      while not(tblNotes.eof) do
+        begin
+          if ((tblNotes['SubjectID'] = cmbSubjects.itemIndex) OR (cmbSubjects.itemIndex = 0)) AND ((pos(edtSearch.text, tblNotes['Title']) > 0) OR (edtSearch.text = '')) then
+             begin
+               cmbNotes.items.add(tblNotes['Title']);
+             end;
+
+          tblNotes.next;
+        end;
+
+
+    end;
+end;
+
+procedure TfrmsNotes.edtSearchEnter(Sender: TObject);
+begin
+  DoNotes;
+end;
+
+procedure TfrmsNotes.FormShow(Sender: TObject);
+begin
+ with dmEducation do
+   begin
+     tblSubjects.open;
+     tblSubjects.first;
+     cmbSubjects.items.clear;
+     cmbSubjects.items.add('All');
+     while not(tblSubjects.eof) do
+      begin
+        cmbSubjects.items.add(tblSubjects['SubjectName']);
+        tblSubjects.next;
+      end;
+     tblSubjects.close;
+
+     tblNotes.open;
+     tblNotes.first;
+     cmbNotes.items.clear;
+     while not(tblNotes.eof) do
+      begin
+        cmbNotes.items.add(tblNotes['Title']);
+        tblNotes.next;
+      end;
+     tblNotes.close;
+
+     cmbSubjects.itemIndex := 0;
+   end;
+end;
+
+end.

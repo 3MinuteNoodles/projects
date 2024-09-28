@@ -1,0 +1,16 @@
+3,2
+The Mona Lisa
+Leonardo DiCaprio
+Leonardo da vinci
+2,
+4
+Who painted "The Starry Night"
+Vincent van Gogh
+Vince Vaughn
+1,
+2
+Who painted "the water lily pond"
+Claude Monet
+Caudia Money
+1,
+6

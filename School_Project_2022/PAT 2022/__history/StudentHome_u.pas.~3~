@@ -1,0 +1,41 @@
+unit StudentHome_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmStudentHome = class(TForm)
+    pnlCourse: TPanel;
+    pnlNotes: TPanel;
+    pnlTests: TPanel;
+    pnlStudents: TPanel;
+    lblMarks: TLabel;
+    btnSignOut: TButton;
+    btnHelp: TButton;
+    btnMessages: TButton;
+    procedure btnSignOutClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmStudentHome: TfrmStudentHome;
+
+implementation
+Uses
+ Login_u, sMarks_u, sNotes_u, sProfile_u, sTest_u;
+
+{$R *.dfm}
+
+procedure TfrmStudentHome.btnSignOutClick(Sender: TObject);
+begin
+  frmStudentHome.hide;
+  frmLogin.show;
+end;
+
+end.

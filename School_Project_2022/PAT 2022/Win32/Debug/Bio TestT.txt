@@ -1,0 +1,19 @@
+3,3
+What is the mitochondria.
+The mitochondria is the powerhouse of the cell.
+Cells that make energy.
+An organ.
+1,
+1
+Choose the mammal
+Whale
+pufferfish
+iguana
+1,
+1
+how many ventricles in the heart.
+206
+4
+11
+2,
+4

@@ -1,0 +1,378 @@
+object frmNormalHome: TfrmNormalHome
+  Left = 760
+  Top = 145
+  Caption = 'Home'
+  ClientHeight = 734
+  ClientWidth = 490
+  Color = 4536114
+  DoubleBuffered = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindow
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlSelectChat: TPanel
+    Left = 7
+    Top = 48
+    Width = 481
+    Height = 685
+    BevelOuter = bvNone
+    TabOrder = 0
+    object lblSelectChat: TLabel
+      Left = 16
+      Top = 17
+      Width = 50
+      Height = 13
+      Caption = 'Chat with:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSendMessage: TLabel
+      Left = 16
+      Top = 589
+      Width = 69
+      Height = 13
+      Caption = 'Message text:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 296
+      Top = 17
+      Width = 50
+      Height = 13
+      Caption = 'Chat with:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object cmbSelectChat: TComboBox
+      Left = 16
+      Top = 40
+      Width = 449
+      Height = 21
+      Hint = 'Select a user to chat with here'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = cmbSelectChatChange
+    end
+    object redMessages: TRichEdit
+      Left = 16
+      Top = 90
+      Width = 449
+      Height = 463
+      Hint = 'Your messages are displayed here'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ReadOnly = True
+      ScrollBars = ssVertical
+      ShowHint = True
+      TabOrder = 1
+      Zoom = 100
+    end
+    object edtMessage: TEdit
+      Left = 16
+      Top = 608
+      Width = 449
+      Height = 21
+      Hint = 'Enter a message to send here'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      MaxLength = 160
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+    end
+    object btnSendMessage: TButton
+      Left = 16
+      Top = 639
+      Width = 449
+      Height = 25
+      Hint = 'Click here to send the message you have typed above'
+      Caption = 'Send message'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = btnSendMessageClick
+    end
+    object btnDeleteMessage: TButton
+      Left = 16
+      Top = 559
+      Width = 449
+      Height = 25
+      Hint = 
+        'Click here if you want to delete one of the messages you have se' +
+        'nt'
+      Caption = 'Select a message to delete'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnClick = btnDeleteMessageClick
+    end
+    object cmbSort: TComboBox
+      Left = 360
+      Top = 13
+      Width = 105
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      OnChange = cmbSortChange
+      Items.Strings = (
+        'UserID'
+        'First_name'
+        'Surname')
+    end
+  end
+  object btnLogout: TButton
+    Left = 8
+    Top = 8
+    Width = 118
+    Height = 34
+    Hint = 'Sign out of user'
+    Caption = #11013#65039' Sign out'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 4536114
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    OnClick = btnLogoutClick
+  end
+  object pnlDeleteMessage: TPanel
+    Left = 8
+    Top = 48
+    Width = 473
+    Height = 686
+    BevelOuter = bvNone
+    TabOrder = 2
+    object lblDelete: TLabel
+      Left = 15
+      Top = 55
+      Width = 129
+      Height = 13
+      Caption = 'Select a message to delete'
+    end
+    object cmbMessages: TComboBox
+      Left = 15
+      Top = 74
+      Width = 442
+      Height = 21
+      Hint = 'Select the message you want to delete here'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = cmbMessagesChange
+    end
+    object redDeleteMessage: TRichEdit
+      Left = 15
+      Top = 122
+      Width = 442
+      Height = 89
+      Hint = 'The message you are about to delete is displayed here'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNone
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 1
+      Zoom = 100
+    end
+    object btnDeleteMessageFinal: TButton
+      Left = 15
+      Top = 234
+      Width = 442
+      Height = 25
+      Hint = 'Click here to delete your message'
+      Caption = 'Delete message'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnDeleteMessageFinalClick
+    end
+    object btnBack: TButton
+      Left = 15
+      Top = 12
+      Width = 118
+      Height = 37
+      Hint = 'Click here to return to your chats'
+      Caption = #11013#65039' Back to chat'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = btnBackClick
+    end
+  end
+  object btnHelp: TBitBtn
+    Left = 400
+    Top = 8
+    Width = 81
+    Height = 33
+    Hint = 'Click here if you are in need of assistance'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Kind = bkHelp
+    NumGlyphs = 2
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+    OnClick = btnHelpClick
+  end
+  object redHelpNormalHome: TRichEdit
+    Left = 0
+    Top = 0
+    Width = 489
+    Height = 734
+    Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'General:'
+      ''
+      
+        'If you want to go back to the login screen click the sign out bu' +
+        'tton in the top left corner.'
+      
+        'Most buttons will be disabled untill you select a user in the "C' +
+        'hat with" combo box.'
+      ''
+      'Selecting user:'
+      ''
+      
+        'Select a user with the chat with combo box so that you can chat ' +
+        'with that user. The'
+      
+        'messages between you and that user will be displayed in the rich' +
+        ' edit below that. You'
+      
+        'Can use the sort combo box to help you find the user you are loo' +
+        'king for more easily.'
+      ''
+      'Sending a message:'
+      ''
+      
+        'Once you have selected a user you can type a message to send in ' +
+        'the "Message text"'
+      
+        'edit box. Once you are satisfied with your message you can send ' +
+        'it useing the "send'
+      
+        'message" button below that. All sent messages are encrypted for ' +
+        'your safety.'
+      ''
+      'Deleting a message:'
+      ''
+      
+        'Please click the delete message button if you want to delete one' +
+        ' of the message that'
+      
+        'you have sent. If you delete a message neither you nor the perso' +
+        'n you sent it to can'
+      
+        'see it any longer. Once you click the "delete message" button yo' +
+        'u will be taken to a menu'
+      
+        'where you can choose which of your sent messages you want to del' +
+        'ete in a combo box.'
+      
+        'In the combo box you will be given a preview of the message, but' +
+        ' once you select it you'
+      
+        'can see the whole message in the rich edit below that. Once you ' +
+        'are sure that you have'
+      
+        'selected a message click the delete message button to permanentl' +
+        'y remove it from the'
+      'chat.')
+    ParentFont = False
+    TabOrder = 4
+    Visible = False
+    Zoom = 100
+  end
+  object btnNotHelp: TButton
+    Left = 208
+    Top = 656
+    Width = 75
+    Height = 25
+    Caption = 'I understand'
+    Enabled = False
+    TabOrder = 5
+    Visible = False
+    OnClick = btnNotHelpClick
+  end
+end

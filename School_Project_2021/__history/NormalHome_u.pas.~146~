@@ -1,0 +1,649 @@
+unit NormalHome_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.ExtCtrls, dmdbWhysapp_u, Vcl.Buttons;
+
+type
+  TfrmNormalHome = class(TForm)
+    pnlSelectChat: TPanel;
+    cmbSelectChat: TComboBox;
+    lblSelectChat: TLabel;
+    redMessages: TRichEdit;
+    edtMessage: TEdit;
+    btnSendMessage: TButton;
+    lblSendMessage: TLabel;
+    btnLogout: TButton;
+    btnDeleteMessage: TButton;
+    pnlDeleteMessage: TPanel;
+    cmbMessages: TComboBox;
+    lblDelete: TLabel;
+    redDeleteMessage: TRichEdit;
+    btnDeleteMessageFinal: TButton;
+    btnBack: TButton;
+    Label1: TLabel;
+    cmbSort: TComboBox;
+    btnHelp: TBitBtn;
+    redHelpNormalHome: TRichEdit;
+    btnNotHelp: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure btnSendMessageClick(Sender: TObject);
+    procedure btnLogoutClick(Sender: TObject);
+    procedure cmbSelectChatChange(Sender: TObject);
+    procedure btnDeleteMessageClick(Sender: TObject);
+    procedure cmbMessagesChange(Sender: TObject);
+    procedure btnDeleteMessageFinalClick(Sender: TObject);
+    procedure btnBackClick(Sender: TObject);
+    procedure cmbSortChange(Sender: TObject);
+    procedure btnHelpClick(Sender: TObject);
+    procedure btnNotHelpClick(Sender: TObject);
+  private
+    { Private declarations }
+
+    iReciever, iUserID, iMessage : integer;
+
+    Function Encrypt(sMessage: string): string;
+    function Decrypt(sMessage: string): string;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmNormalHome: TfrmNormalHome;
+
+implementation
+
+{$R *.dfm}
+
+uses Login_u;
+
+procedure TfrmNormalHome.btnBackClick(Sender: TObject);   //Messed with this lol
+var
+ iSender, iUsersFound : integer;
+ sSenderName : string;
+begin
+  pnlSelectChat.bringtofront;
+  pnlSelectChat.visible := true;
+  pnlSelectChat.enabled := True;
+
+
+  if cmbSelectCHat.text = '' then
+    begin
+      redMessages.lines.clear;
+      Exit;
+    end;
+
+  with dmdbWhysapp do
+  Begin
+    //Gets user ID
+    iUserID := strtoint(Copy(cmbSelectChat.Text, 7, pos('N', cmbSelectChat.text) - 10));
+
+    //Shows who you are messaging and does some fomatting
+    redMessages.lines.clear;
+    redMessages.lines.Add('Messaging User ' + inttostr(iUserID) + ':' + #13 + Copy(cmbSelectChat.Items[cmbSelectChat.itemindex], pos('N', cmbSelectChat.Items[cmbSelectChat.itemindex]) + 6, 100));
+    redMessages.lines.Add('________________________________________________________' + #13);
+
+    tblMessages.Open;
+    tblMessages.First;
+    while not(tblMessages.Eof) do
+    Begin
+
+      if ((tblMessages['SenderID'] = iUserID) AND                                        //Checks if message is between user and who they are messaging
+        (tblMessages['ReceiverID'] = frmLogin.iLoggedinID)) OR
+        ((tblMessages['SenderID'] = frmLogin.iLoggedinID) AND
+        (tblMessages['ReceiverID'] = iUserID)) then
+      Begin
+        //Fetches sender and receiver
+        iSender := tblMessages['SenderID'];
+        iReciever := tblMessages['ReceiverID'];
+
+        iUsersFound := 0;
+
+        tblUsers.Open;
+        tblUsers.First;
+
+        //Fetches the name and surname of the two users to display later
+        while not(tblUsers.Eof) and (iUsersFound < 2) do
+        Begin
+          if tblUsers['UserID'] = iSender then
+          Begin
+            inc(iUsersFound);
+            sSenderName := tblUsers['First_name'] + ' ' + tblUsers['Surname'];
+          End;
+          tblUsers.Next;
+        End;
+
+        //Displays name of whoever sent the message
+        if iSender = frmLogin.iLoggedinID then
+        Begin
+          redMessages.lines.Add('Sent by: YOU' + #13 + #13 + Decrypt(tblMessages
+            ['Message']) + #13 + #13 + 'Date: ' +
+            datetostr(tblMessages['DateSent']) + #13 + '----------------');
+        End
+        Else
+        Begin
+          redMessages.lines.Add('Sent by: ' + sSenderName + #13 + #13 +
+            Decrypt(tblMessages['Message']) + #13 + #13 + 'Date: ' +
+            datetostr(tblMessages['DateSent']) + #13 + '----------------');
+        End;
+
+      End;
+      tblMessages.Next;
+    End;
+
+  End;
+end;
+
+
+procedure TfrmNormalHome.btnDeleteMessageClick(Sender: TObject);
+begin
+  pnlDeleteMessage.bringtofront;
+
+  with dmdbwhysapp do
+    begin
+      tblMessages.open;
+      tblMessages.first;
+      cmbMessages.items.clear;
+
+      while not(tblMessages.eof) do
+        begin
+          //puts all of your sent messages into a combo box
+          if (tblMessages['SenderID'] = FrmLogin.iLoggedinID) and (tblMessages['ReceiverID'] = iUserID) then
+            begin
+              cmbMessages.items.add('MessageNO : ' + inttostr(tblMessages['MessageNO']) + ' ' + '  Preview: ' + copy(Decrypt(tblMessages['Message']), 1, 30) + '...');
+            end;
+          tblMessages.next;
+        end;
+    end;
+end;
+
+procedure TfrmNormalHome.btnDeleteMessageFinalClick(Sender: TObject);
+var
+ iYEs   : integer;
+ bFOund : boolean;
+begin
+  //This button deletes the message
+  if cmbSelectChat.text = '' then
+    begin
+      Showmessage('Please select a message to delete in the combo box above');
+      Exit;
+    end;
+
+
+  iYes := MessageDlg('Are you sure you want to permanantly delete this message?', mtConfirmation, [mbYes, mbNO], 0);
+  bFound := False;
+
+  if (iYes < 6) or (iYes > 7) then
+    begin
+      showmessage('Cancelled');
+      Exit;
+    end;
+  if iYes = 7 then
+    begin
+      SHowmessage('Cancelled');
+      Exit;
+    end
+    Else if iYes = 6 then
+         begin
+           with dmDbWHysapp do
+           begin
+             tblMessages.open;
+             tblMessages.First;
+
+             while not(tblMessages.eof) and not(bFOund) do
+               begin
+                  if tblMessages['MessageNO'] = iMessage then
+                    begin
+                      bFound := true;
+                      tblMessages.Delete;
+                    end;
+                 tblMessages.next;
+               end;
+           end;
+         end;
+
+  cmbMessages.itemindex := -1;
+  redDeletemessage.lines.clear;
+
+  cmbMessages.items.clear;
+  with dmdbwhysapp do
+    begin
+      tblMessages.open;
+      tblMessages.first;
+
+      while not(tblMessages.eof) do
+        begin
+          //puts all of your sent messages into a combo box
+          if (tblMessages['SenderID'] = FrmLogin.iLoggedinID) and (tblMessages['ReceiverID'] = iUserID) then
+            begin
+              cmbMessages.items.add('MessageNO : ' + inttostr(tblMessages['MessageNO']) + ' ' + '  Preview: ' + copy(Decrypt(tblMessages['Message']), 1, 30) + '...');
+            end;
+          tblMessages.next;
+        end;
+    end;
+
+
+end;
+
+procedure TfrmNormalHome.btnHelpClick(Sender: TObject);
+begin
+  redHelpNormalHome.Enabled  := True;
+  redHelpNormalHome.Visible  := True;
+  btnNothelp.Visible         := True;
+  btnNothelp.Enabled         := True;
+  redHelpNormalHome.ReadOnly := True;
+  pnlSelectChat.hide;
+  pnlDeleteMessage.hide;
+end;
+
+procedure TfrmNormalHome.btnLogoutClick(Sender: TObject);
+begin
+ //Goes back to previous form
+  frmNormalHome.hide;
+  frmLogin.show;
+end;
+
+procedure TfrmNormalHome.btnNotHelpClick(Sender: TObject);
+begin
+  redHelpNormalHome.Enabled  := False;
+  redHelpNormalHome.Visible  := False;
+  btnNothelp.Visible         := False;
+  btnNothelp.Enabled         := False;
+  pnlSelectChat.show;
+  pnlDeleteMessage.show;
+end;
+
+procedure TfrmNormalHome.btnSendMessageClick(Sender: TObject);
+var
+  iLastmessageNO: integer;
+begin
+  if edtMessage.text = '' then
+    begin
+      showmessage('Please enter a message to send');
+      Exit;
+    end;
+
+  with dmdbWhysapp do
+  begin
+    tblMessages.open;
+    tblMessages.Last;
+
+    //prevents you from sending a message that has the wrong date(earlier than most recent message)
+    if tblMessages['DateSent'] > Date then
+      begin
+        Showmessage('Your computers date is earlier than the last message sent, please check that it is correct before sending a message');
+        exit;
+      end;
+
+
+
+    //Saves the message to the database
+    iLastmessageNO := tblMessages['MessageNo'];
+    tblMessages.Insert;
+    tblMessages['MessageNO'] := iLastmessageNO + 1;
+    tblMessages['SenderID'] := frmLogin.iLoggedinID;
+    tblMessages['ReceiverID'] := iUserID;
+    tblMessages['Message'] := Encrypt(edtMessage.text);
+    tblMessages['DateSent'] := date;
+    tblMessages.post;
+    tblMessages.close;
+    //Displays message
+    redMessages.lines.Add('Sent by: YOU' + #13 + #13 + edtMessage.text + #13 +
+      #13 + 'Date: ' + datetostr(date) + #13 + '----------------');
+  end;
+
+  edtMessage.text := '';
+end;
+
+
+procedure TfrmNormalHome.cmbMessagesChange(Sender: TObject);
+var
+sString : string;
+iNum, iTest : integer;
+begin
+  with dmdbWHysapp do
+    begin
+      redDeleteMessage.lines.clear;
+      tblMessages.open;
+      tbLmessages.first;
+      //Gets message no
+      sString := cmbMessages.text;
+      delete(sString, 1, pos(' ', sString));
+      delete(sString, 1, pos(' ', sString));
+      iNum := strtoint(copy(sString, 1, pos(' ', sString) - 1));
+
+      //Displays message
+      while not tblMessages.eof do
+        begin
+          if tblMessages['MessageNO'] = iNum then
+            begin
+              iMessage := tblMessages['MessageNO'];
+              redDeleteMessage.lines.add('Message: ');
+              redDeleteMessage.lines.add(Decrypt(tblMessages['Message']));
+            end;
+          tblMessages.next;
+        end;
+
+    end;
+end;
+
+procedure TfrmNormalHome.cmbSelectChatChange(Sender: TObject);
+var
+  iSender, iUsersFound: integer;
+  sSenderName, sTemp: string;
+begin
+   //Check that they have selected a chat
+  if cmbSelectChat.itemindex = -1 then
+  Begin
+    Showmessage('Please choose a chat in the combo box above');
+    Exit;
+  End;
+  //Makes it so user can send message and delete message
+  edtMessage.enabled := True;
+  btnSendMessage.enabled := True;
+  btnDeletemessage.enabled := True;
+
+  with dmdbWhysapp do
+  Begin
+    //Gets user ID
+    sTemp := cmbSelectChat.text;
+    delete(sTemp,1,pos(' ',sTemp));
+    iUserID := strtoint(copy(sTemp,1,pos(' ', sTemp) - 2));
+
+    //Shows who you are messaging and does some fomatting
+    redMessages.lines.clear;
+    redMessages.lines.Add('Messaging User ' + inttostr(iUserID) + ':' + #13 + Copy(cmbSelectChat.Items[cmbSelectChat.itemindex], pos('N', cmbSelectChat.Items[cmbSelectChat.itemindex]) + 6, 100));
+    redMessages.lines.Add('________________________________________________________' + #13);
+
+    tblMessages.Open;
+    tblMessages.First;
+    while not(tblMessages.Eof) do
+    Begin
+
+      if ((tblMessages['SenderID'] = iUserID) AND                                        //Checks if message is between user and who they are messaging
+        (tblMessages['ReceiverID'] = frmLogin.iLoggedinID)) OR
+        ((tblMessages['SenderID'] = frmLogin.iLoggedinID) AND
+        (tblMessages['ReceiverID'] = iUserID)) then
+      Begin
+        //Fetches sender and receiver
+        iSender := tblMessages['SenderID'];
+        iReciever := tblMessages['ReceiverID'];
+
+        iUsersFound := 0;
+
+        tblUsers.Open;
+        tblUsers.First;
+
+        //Fetches the name and surname of the two users to display later
+        while not(tblUsers.Eof) and (iUsersFound < 2) do
+        Begin
+          if tblUsers['UserID'] = iSender then
+          Begin
+            inc(iUsersFound);
+            sSenderName := tblUsers['First_name'] + ' ' + tblUsers['Surname'];
+          End;
+          tblUsers.Next;
+        End;
+
+        //Displays name of whoever sent the message
+        if iSender = frmLogin.iLoggedinID then
+        Begin
+          redMessages.lines.Add('Sent by: YOU' + #13 + #13 + Decrypt(tblMessages
+            ['Message']) + #13 + #13 + 'Date: ' +
+            datetostr(tblMessages['DateSent']) + #13 + '----------------');
+        End
+        Else
+        Begin
+          redMessages.lines.Add('Sent by: ' + sSenderName + #13 + #13 +
+            Decrypt(tblMessages['Message']) + #13 + #13 + 'Date: ' +
+            datetostr(tblMessages['DateSent']) + #13 + '----------------');
+        End;
+
+      End;
+      tblMessages.Next;
+    End;
+
+  End;
+end;
+
+procedure TfrmNormalHome.cmbSortChange(Sender: TObject);
+var
+i : integer;
+sSort : String;
+begin
+  //Sorts by
+  with dmdbWhysapp do
+    begin
+      tblUsers.open;
+      sSort := cmbSort.text;
+      tblUsers.sort := sSort + ' ASC';
+      cmbSelectChat.items.clear;
+
+      tblUsers.first;
+
+      while not(tblUsers.eof) do
+        begin
+          if (tblUsers['UserID'] <> 1) and (tblUsers['UserID'] <> frmLogin.iLoggedinID) AND (tblUsers['IsDisabled'] = False) then
+            Begin
+              cmbSelectChat.Items.Add('User: ' + inttostr(tblUsers['UserID']) + ', Name: ' + tblUsers['First_name'] + ' ' + tblUsers['Surname']);
+            End;
+
+          tblUsers.next;
+        end;
+
+      tblUSers.close;
+    end;
+end;
+
+function TfrmNormalHome.Decrypt(sMessage: string): string;
+var
+  sName1, sName2, sKey, sResult: string;
+  iLetterKey, iLetterMessage, iPos, iLetter: integer;
+begin
+  with dmdbWhysapp do
+  begin
+    tblUsers.Open;
+    tblUsers.First;
+    //initialize some variables
+    sName1 := '';
+    sName2 := '';
+    sResult := '';
+    iLetterKey := 0;
+
+     //Fetches the first name of one user
+      while (not tblUsers.Eof) and (sName1 = '') do
+      begin
+        if (tblUsers['UserID'] = iUserID) or
+          (tblUsers['UserID'] = frmLogin.iLoggedinID) then
+        begin
+          sName1 := tblUsers['First_name'];
+        end;
+        tblUsers.Next;
+      end;
+
+      //Fetches the first name of the other user
+      while (not tblUsers.Eof) and (sName2 = '') do
+      begin
+        if (tblUsers['UserID'] = iUserID) or
+          (tblUsers['UserID'] = frmLogin.iLoggedinID) then
+        begin
+          sName2 := tblUsers['First_name'];
+        end;
+        tblUsers.Next;
+      end;
+
+    //Generates key from first 3 letters of each name (does validation for if names are shorter than 3 digits)
+    if (Length(sName1) > 2) then
+    begin
+      if Length(sName2) > 2 then
+      begin
+        sKey := Copy(sName1, 1, 3) + Copy(sName2, 1, 3);
+      end
+      else
+      begin
+        sKey := Copy(sName1, 1, 3) + sName2;
+      end;
+
+    end
+    else
+    begin
+      if Length(sName2) > 2 then
+      begin
+        sKey := sName1 + Copy(sName1, 1, 3);
+      end
+      else
+      begin
+        sKey := sName1 + sName2;
+      end;
+    end;
+
+    //Decrypts message using key
+    while sMessage <> '' do
+    begin
+      inc(iLetterKey);  //controls digit used from key
+
+      if iLetterKey > Length(sKey) then    //resets digit if it's higher than the length of the key
+      begin
+        iLetterKey := 1;
+      end;
+
+      iPos := pos(' ',sMessage);    //Spaces in message are between encrypted characters
+      iLetter := strtoint(copy(smessage,1,ipos - 1)); //Saves the encrypted letter from smessage in ascii value
+      Delete(sMessage,1,iPos);      //Deletes encrypted charater from sMessage after it has been fetched
+      iLetter := iLetter - ord(sKey[iLetterKey]);   //Decrypts the letter using a letter from the key
+
+      sResult := sResult + chr(iLetter);     //Saves the letter at the end of a string
+
+    end;
+
+    Result := sResult; //output of function
+  end;
+end;
+
+function TfrmNormalHome.Encrypt(sMessage: string): string;
+var
+  sName1, sName2, sKey, sResult: string;
+  iLetterKey, iLetterMessage: integer;
+begin
+  with dmdbWhysapp do
+  begin
+    tblUsers.Open;
+    tblUsers.First;
+    sName1 := '';
+    sName2 := '';
+    sResult := '';
+    iLetterKey := 0;
+
+      //Fetches first name of one user
+      while (not tblUsers.Eof) and (sName1 = '') do
+      begin
+        if (tblUsers['UserID'] = iUserID) or (tblUsers['UserID'] = frmLogin.iLoggedinID) then
+        begin
+          sName1 := tblUsers['First_name'];
+        end;
+        tblUsers.Next;
+      end;
+
+
+      //Fetches first name of other user
+      while (not tblUsers.Eof) and (sName2 = '') do
+      begin
+        if (tblUsers['UserID'] = iUserID) or (tblUsers['UserID'] = frmLogin.iLoggedinID) then
+        begin
+          sName2 := tblUsers['First_name'];
+        end;
+        tblUsers.Next;
+      end;
+
+
+    //Generates key from first 3 letters of each name (does validation for if names are shorter than 3 digits)
+    if (Length(sName1) > 2) then
+    begin
+      if Length(sName2) > 2 then
+      begin
+        sKey := Copy(sName1, 1, 3) + Copy(sName2, 1, 3);
+      end
+      else
+      begin
+        sKey := Copy(sName1, 1, 3) + sName2;
+      end;
+
+    end
+    else
+    begin
+      if Length(sName2) > 2 then
+      begin
+        sKey := sName1 + Copy(sName1, 1, 3);
+      end
+      else
+      begin
+        sKey := sName1 + sName2;
+      end;
+    end;
+
+    //Encrypts message using key
+    for iLetterMessage := 1 to Length(sMessage) do
+    begin
+      inc(iLetterKey);      //controls the letter used from the key
+
+      if iLetterKey > Length(sKey) then
+      begin
+        iLetterKey := 1;   //resets letter if it is higher than length of the key
+      end;
+      sResult := sResult + inttostr(ord(sMessage[iLetterMessage]) + ord(sKey[iLetterKey])) + ' ';          //adds values of a letter from key and a letter from message
+    end;
+    Result := sResult;
+
+  end;
+end;
+
+procedure TfrmNormalHome.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  //Closes entire application if you close this form (this appears in all forms)
+  Application.Terminate;
+end;
+
+procedure TfrmNormalHome.FormShow(Sender: TObject);
+
+begin
+  cmbSelectChat.Items.clear;
+  //Populates the combo box with the potential users that can be messaged
+  With dmdbWhysapp do
+  Begin
+    tblUsers.Open;
+    tblUsers.First;
+
+    while not tblUsers.Eof do
+    Begin
+      if (tblUsers['UserType'] = 'Normal') and
+        (tblUsers['UserID'] <> frmLogin.iLoggedinID) then
+      Begin
+        if not(tblUsers['IsDisabled']) then
+          Begin
+             cmbSelectChat.Items.Add('User: ' + inttostr(tblUsers['UserID']) + ', Name: ' + tblUsers['First_name'] + ' ' + tblUsers['Surname']);
+          End;
+      End;
+      tblUsers.Next;
+    End;
+    tblUsers.close;
+  End;
+
+  //Makes it so you cant send a message if you haven't selected a chat
+  redMessages.clear;
+  edtMessage.enabled       := False;
+  btnSendMessage.enabled   := False;
+
+  edtMessage.clear;
+  cmbSelectChat.Style      := csOwnerDrawFixed;
+  cmbMessages.style        := csOwnerDrawFixed;
+
+  pnlSelectChat.bringtofront;
+  btndeletemessage.enabled := false;
+end;
+
+end.

@@ -1,0 +1,128 @@
+object frmViewStudents: TfrmViewStudents
+  Left = 329
+  Top = 185
+  Caption = 'View Students'
+  ClientHeight = 414
+  ClientWidth = 547
+  Color = 4667697
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindow
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblSInfo: TLabel
+    Left = 8
+    Top = 42
+    Width = 235
+    Height = 13
+    Caption = 'Select a student below to view more information:'
+    Color = 4799279
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object lblSubjects: TLabel
+    Left = 8
+    Top = 162
+    Width = 137
+    Height = 13
+    Caption = 'Selected Student'#39's Subjects:'
+    Color = 4733488
+    ParentColor = False
+  end
+  object lblMarks: TLabel
+    Left = 8
+    Top = 282
+    Width = 124
+    Height = 13
+    Caption = 'Selected Student'#39's Marks:'
+    Color = 4799279
+    ParentColor = False
+  end
+  object btnHelp: TButton
+    Left = 462
+    Top = 5
+    Width = 75
+    Height = 25
+    Caption = 'Help'
+    TabOrder = 0
+  end
+  object btnHome: TButton
+    Left = 8
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Home'
+    TabOrder = 1
+    OnClick = btnHomeClick
+  end
+  object dbgStudents: TDBGrid
+    Left = 8
+    Top = 61
+    Width = 529
+    Height = 94
+    DataSource = dmEducation.dsrUsers
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNone
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindow
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnCellClick = dbgStudentsCellClick
+  end
+  object dbgSubjects: TDBGrid
+    Left = 8
+    Top = 181
+    Width = 529
+    Height = 94
+    DataSource = dmEducation.dsrSubjects
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNone
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindow
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnCellClick = dbgStudentsCellClick
+  end
+  object dbgMarks: TDBGrid
+    Left = 8
+    Top = 301
+    Width = 529
+    Height = 94
+    DataSource = dmEducation.dsrMarks
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNone
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindow
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnCellClick = dbgStudentsCellClick
+  end
+end

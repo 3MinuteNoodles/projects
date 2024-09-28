@@ -1,0 +1,14 @@
+program WhysApp_p;
+
+uses
+  Vcl.Forms,
+  Whysapp_u in 'Whysapp_u.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

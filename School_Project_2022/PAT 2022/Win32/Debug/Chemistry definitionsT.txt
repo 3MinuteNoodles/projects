@@ -1,0 +1,11 @@
+2,2
+Define: "Concentration"
+The number of moles of solute in a given volume of solvent
+Number of moles in your garden
+1,
+10
+Define: "Activation Energy"
+Energy released by a chemical reaction
+The minimum amount of energy required to start a chemical reaction.
+2,
+2

@@ -1,0 +1,19 @@
+3,3
+Choose the real programming language.
+Rusty
+Go
+Graphite
+2,
+1
+Choose the real programming language.
+Erlang
+Furlong
+friar
+1,
+4
+Which language came first
+C++
+C#
+C
+3,
+2

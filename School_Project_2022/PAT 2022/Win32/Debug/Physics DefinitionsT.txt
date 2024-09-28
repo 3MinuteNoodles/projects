@@ -1,0 +1,41 @@
+5,5
+Define: "An Electric Field"
+A region in space in which an electric charge will experience a force
+The sum of the electric charges in an area
+The space where electons flow
+rate of current
+A point in space where charge moves
+1,
+2
+Define: "Electric Field Strength At a Point"
+Rate of flow of charge at a point.
+The potential difference to a reference point.
+How strong a force is.
+the force per positive unit charge at that point in the electric field.
+Option 5
+4,
+1
+State the law of conservation of charge.
+For equal charges there is no force.
+Charge cannot be created or destroyed but can only be tranferred from one object to another.
+A positive charge cannot become negative.
+Charge stays charge.
+All of the above.
+2,
+5
+Define: "Electromagnetic induction"
+All of the below
+Induced charge stays constant.
+Charge gets created in a conductor by a changing magnetic field.
+A changing current induces a magnetic field.
+The phenomenon where an Emf and therefore a current is induced in a conductor by a changing magnetic field.
+5,
+1
+State newton's 3rd law of motion.
+Objects keep their momentum.
+objects fall at the same rate in a vacuum.
+Inertia is the conservation of momentum.
+When body A exerts a force on body B, body B exerts a force of equal magnitude in the opposite direction
+Objects go brrr
+4,
+4

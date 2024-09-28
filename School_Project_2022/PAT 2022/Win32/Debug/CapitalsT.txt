@@ -1,0 +1,25 @@
+4,3
+Capital of Spain?
+Barcelona
+Madrid
+Russia
+2,
+2
+Capital of South Africa?
+Pretoria
+Johannesburg
+Cape Town
+1,3,
+10
+Capital of Finland
+Heavensinki
+Nokia
+Helsinki
+3,
+1
+Brazil
+Rio de Janeiro
+São Paulo
+Brasília
+3,
+10

@@ -1,0 +1,564 @@
+object frmLogin: TfrmLogin
+  Left = 307
+  Top = 175
+  Caption = 'Login'
+  ClientHeight = 441
+  ClientWidth = 361
+  Color = 4601906
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 19
+  object lblWelcome: TLabel
+    Left = 61
+    Top = 8
+    Width = 232
+    Height = 29
+    Caption = 'Welcome to HowsApp'
+    Color = 4667697
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -24
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object pnlTeacherLogin: TPanel
+    Left = 5
+    Top = 93
+    Width = 353
+    Height = 238
+    BevelOuter = bvNone
+    TabOrder = 1
+    object lblTName: TLabel
+      Left = 76
+      Top = 51
+      Width = 47
+      Height = 19
+      Caption = 'Name:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblTSurname: TLabel
+      Left = 76
+      Top = 88
+      Width = 69
+      Height = 19
+      Caption = 'Surname:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblTPassword: TLabel
+      Left = 76
+      Top = 127
+      Width = 73
+      Height = 19
+      Caption = 'Password:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblTLogin: TLabel
+      Left = 108
+      Top = 11
+      Width = 129
+      Height = 19
+      Caption = 'Login As Teacher:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edtTName: TEdit
+      Left = 164
+      Top = 48
+      Width = 121
+      Height = 27
+      TabOrder = 0
+    end
+    object edtTSurname: TEdit
+      Left = 164
+      Top = 85
+      Width = 121
+      Height = 27
+      TabOrder = 1
+    end
+    object edtTPassword: TEdit
+      Left = 164
+      Top = 124
+      Width = 121
+      Height = 27
+      PasswordChar = '*'
+      TabOrder = 2
+    end
+    object btnTHelp: TButton
+      Left = 76
+      Top = 170
+      Width = 104
+      Height = 33
+      Caption = 'Help'
+      TabOrder = 3
+    end
+    object btnTLogin: TButton
+      Left = 180
+      Top = 170
+      Width = 104
+      Height = 33
+      Caption = 'Login'
+      TabOrder = 4
+      OnClick = btnTLoginClick
+    end
+    object btnTBack: TButton
+      Left = 8
+      Top = 11
+      Width = 41
+      Height = 33
+      Caption = #55358#56340
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      OnClick = btnTBackClick
+    end
+    object btnShowTPassword: TButton
+      Left = 287
+      Top = 123
+      Width = 35
+      Height = 29
+      Caption = #55357#56385
+      TabOrder = 6
+      OnMouseDown = btnShowTPasswordMouseDown
+      OnMouseUp = btnShowTPasswordMouseUp
+    end
+  end
+  object pnlSLogin: TPanel
+    Left = 0
+    Top = 105
+    Width = 353
+    Height = 238
+    BevelOuter = bvNone
+    TabOrder = 2
+    object lblSName: TLabel
+      Left = 76
+      Top = 51
+      Width = 47
+      Height = 19
+      Caption = 'Name:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSSurname: TLabel
+      Left = 76
+      Top = 88
+      Width = 69
+      Height = 19
+      Caption = 'Surname:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSPassword: TLabel
+      Left = 76
+      Top = 127
+      Width = 73
+      Height = 19
+      Caption = 'Password:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSLogin: TLabel
+      Left = 108
+      Top = 11
+      Width = 127
+      Height = 19
+      Caption = 'Login As Student:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edtSName: TEdit
+      Left = 164
+      Top = 48
+      Width = 121
+      Height = 27
+      TabOrder = 0
+    end
+    object edtSSurname: TEdit
+      Left = 164
+      Top = 85
+      Width = 121
+      Height = 27
+      TabOrder = 1
+    end
+    object edtSPassword: TEdit
+      Left = 164
+      Top = 124
+      Width = 121
+      Height = 27
+      PasswordChar = '*'
+      TabOrder = 2
+    end
+    object btnSHelp: TButton
+      Left = 76
+      Top = 170
+      Width = 104
+      Height = 33
+      Caption = 'Help'
+      TabOrder = 3
+    end
+    object btnSLogin: TButton
+      Left = 180
+      Top = 170
+      Width = 104
+      Height = 33
+      Caption = 'Login'
+      TabOrder = 4
+      OnClick = btnSLoginClick
+    end
+    object btnSBack: TButton
+      Left = 8
+      Top = 8
+      Width = 41
+      Height = 33
+      Caption = #55358#56340
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      OnClick = btnSBackClick
+    end
+    object btnShowsPassword: TButton
+      Left = 288
+      Top = 123
+      Width = 35
+      Height = 29
+      Caption = #55357#56385
+      TabOrder = 6
+      OnMouseDown = btnShowsPasswordMouseDown
+      OnMouseUp = btnShowsPasswordMouseUp
+    end
+  end
+  object pnlLoginType: TPanel
+    Left = 5
+    Top = 128
+    Width = 353
+    Height = 185
+    BevelOuter = bvNone
+    TabOrder = 0
+    object lblChooseLoginType: TLabel
+      Left = 0
+      Top = 0
+      Width = 148
+      Height = 19
+      Caption = 'Choose Acount type:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnTeacher: TButton
+      Left = 16
+      Top = 33
+      Width = 321
+      Height = 32
+      Caption = 'Login As Teacher'
+      TabOrder = 0
+      OnClick = btnTeacherClick
+    end
+    object btnStudent: TButton
+      Left = 16
+      Top = 81
+      Width = 321
+      Height = 32
+      Caption = 'Login As Student'
+      TabOrder = 1
+      OnClick = btnStudentClick
+    end
+    object btnHelp: TButton
+      Left = 16
+      Top = 128
+      Width = 161
+      Height = 33
+      Caption = 'Help'
+      TabOrder = 2
+    end
+    object btnSignUp: TButton
+      Left = 176
+      Top = 128
+      Width = 161
+      Height = 33
+      Caption = 'Sign Up'
+      TabOrder = 3
+      OnClick = btnSignUpClick
+    end
+  end
+  object pnlCreateUser: TPanel
+    Left = 0
+    Top = 58
+    Width = 358
+    Height = 308
+    BevelOuter = bvNone
+    Enabled = False
+    TabOrder = 3
+    Visible = False
+    object lblcName: TLabel
+      Left = 102
+      Top = 51
+      Width = 47
+      Height = 19
+      Caption = 'Name:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblCSurname: TLabel
+      Left = 80
+      Top = 88
+      Width = 69
+      Height = 19
+      Caption = 'Surname:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblcPassword: TLabel
+      Left = 79
+      Top = 128
+      Width = 73
+      Height = 19
+      Caption = 'Password:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSignUp: TLabel
+      Left = 136
+      Top = 11
+      Width = 62
+      Height = 19
+      Caption = 'Sign Up:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblAccountType: TLabel
+      Left = 120
+      Top = 198
+      Width = 103
+      Height = 19
+      Caption = 'Account Type:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
+    end
+    object lblConfirmPassword: TLabel
+      Left = 18
+      Top = 167
+      Width = 135
+      Height = 19
+      Caption = 'Confirm Password:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edtCreateName: TEdit
+      Left = 164
+      Top = 48
+      Width = 121
+      Height = 27
+      TabOrder = 0
+    end
+    object edtCreateSurname: TEdit
+      Left = 164
+      Top = 85
+      Width = 121
+      Height = 27
+      TabOrder = 1
+    end
+    object edtCreatePassword: TEdit
+      Left = 164
+      Top = 124
+      Width = 121
+      Height = 27
+      PasswordChar = '*'
+      TabOrder = 2
+    end
+    object btncHelp: TButton
+      Left = 76
+      Top = 267
+      Width = 104
+      Height = 39
+      Caption = 'Help'
+      TabOrder = 3
+    end
+    object btnCreate: TButton
+      Left = 181
+      Top = 267
+      Width = 104
+      Height = 39
+      Caption = 'Create New User'
+      TabOrder = 4
+      WordWrap = True
+      OnClick = btnCreateClick
+    end
+    object btnCBack: TButton
+      Left = 8
+      Top = 8
+      Width = 41
+      Height = 33
+      Caption = #55358#56340
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      OnClick = btnCBackClick
+    end
+    object cmbAccountType: TComboBox
+      Left = 76
+      Top = 224
+      Width = 209
+      Height = 27
+      ItemIndex = 1
+      TabOrder = 6
+      Text = 'Student'
+      Items.Strings = (
+        'Teacher'
+        'Student')
+    end
+    object edtCreateCPassword: TEdit
+      Left = 164
+      Top = 164
+      Width = 121
+      Height = 27
+      PasswordChar = '*'
+      TabOrder = 7
+    end
+    object btnShowcPassword: TButton
+      Left = 288
+      Top = 123
+      Width = 35
+      Height = 29
+      Caption = #55357#56385
+      TabOrder = 8
+      OnMouseDown = btnShowcPasswordMouseDown
+      OnMouseUp = btnShowcPasswordMouseUp
+    end
+    object btnShowccPassword: TButton
+      Left = 288
+      Top = 163
+      Width = 35
+      Height = 29
+      Caption = #55357#56385
+      TabOrder = 9
+      OnMouseDown = btnShowccPasswordMouseDown
+      OnMouseUp = btnShowccPasswordMouseUp
+    end
+  end
+  object redHelp: TRichEdit
+    Left = 0
+    Top = -2
+    Width = 359
+    Height = 443
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'HowsApp:'
+      'HowsApp is a prototype for an online '
+      'education '
+      'website.'
+      ''
+      'Here as a teacher, once  you have '
+      'signed up you can create tests and notes for '
+      'students who are trying to learn. You can also'
+      'view the marks of students to see how they are'
+      'doing.'
+      ''
+      'As a student, you can choose subjects and '
+      'then'
+      'view and take all the notes and tests for these'
+      'subjects.'
+      ''
+      'How to sign up:'
+      'If you don'#39't yet have an account, you can click '
+      'the sign up button and create one from there. '
+      'Just enter your details and choose an account '
+      'type and you'#39're done.'
+      ''
+      'How to log in:'
+      'If you already have an account, just click the '
+      'login button for whichever account type you '
+      'have and enter your login details.')
+    ParentFont = False
+    ScrollBars = ssVertical
+    TabOrder = 4
+    Visible = False
+    Zoom = 100
+  end
+end

@@ -1,0 +1,188 @@
+object frmManageKeywords: TfrmManageKeywords
+  Left = 0
+  Top = 0
+  Caption = 'Manage Keywords'
+  ClientHeight = 548
+  ClientWidth = 386
+  Color = 4536114
+  DoubleBuffered = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnHide = FormHide
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlKeywords: TPanel
+    Left = 8
+    Top = 51
+    Width = 370
+    Height = 496
+    BevelOuter = bvNone
+    TabOrder = 0
+    object lblKeywords: TLabel
+      Left = 8
+      Top = 13
+      Width = 51
+      Height = 13
+      Caption = 'Keywords:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object redKeywords: TRichEdit
+      Left = 8
+      Top = 32
+      Width = 353
+      Height = 353
+      Hint = 'Your list of keywords is displayed here'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ReadOnly = True
+      ScrollBars = ssVertical
+      ShowHint = True
+      TabOrder = 0
+      Zoom = 100
+    end
+    object btnAddKeyword: TButton
+      Left = 8
+      Top = 423
+      Width = 353
+      Height = 25
+      Hint = 'Click here to add a new keyword'
+      Caption = 'Add keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = btnAddKeywordClick
+    end
+    object btnDeleteKeyword: TButton
+      Left = 8
+      Top = 454
+      Width = 353
+      Height = 25
+      Hint = 'Click here to delete an existing keyword'
+      Caption = 'Delete Keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnDeleteKeywordClick
+    end
+  end
+  object pnlDeleteKeyword: TPanel
+    Left = 8
+    Top = 51
+    Width = 370
+    Height = 496
+    BevelOuter = bvNone
+    Color = 4536114
+    Enabled = False
+    ParentBackground = False
+    TabOrder = 1
+    Visible = False
+    object lblDeleteKeywords: TLabel
+      Left = 8
+      Top = 51
+      Width = 139
+      Height = 13
+      Caption = 'Choose a keyword to delete:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnDeleteKeywordFinal: TButton
+      Left = 8
+      Top = 136
+      Width = 353
+      Height = 79
+      Caption = 'Delete Keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btnDeleteKeywordFinalClick
+    end
+    object cmbDeleteKeyword: TComboBox
+      Left = 8
+      Top = 70
+      Width = 353
+      Height = 21
+      Hint = 'Select which keyword you want to delete'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+    end
+    object btnBacktolist: TButton
+      Left = 8
+      Top = 8
+      Width = 118
+      Height = 37
+      Hint = 'Click here to return to the list of keywords'
+      Caption = #11013#65039' Back'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnBacktolistClick
+    end
+  end
+  object btnHome: TButton
+    Left = 16
+    Top = 4
+    Width = 118
+    Height = 34
+    Hint = 'Click here to return to the admin home'
+    Caption = #11013#65039' Home'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 4536114
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    OnClick = btnHomeClick
+  end
+end

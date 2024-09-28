@@ -1,0 +1,51 @@
+object frmKeywordMatches: TfrmKeywordMatches
+  Left = 0
+  Top = 0
+  Hint = 'Messages containing keywords are displayed here'
+  Caption = 'Keyword Matches'
+  ClientHeight = 558
+  ClientWidth = 406
+  Color = 4536114
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  ShowHint = True
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object redKeywordMatches: TRichEdit
+    Left = 8
+    Top = 56
+    Width = 393
+    Height = 497
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ScrollBars = ssVertical
+    TabOrder = 0
+    Zoom = 100
+  end
+  object btnBack: TButton
+    Left = 8
+    Top = 8
+    Width = 118
+    Height = 34
+    Hint = 'Click here to return to admin home'
+    Caption = #11013#65039' Home'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 4536114
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnBackClick
+  end
+end

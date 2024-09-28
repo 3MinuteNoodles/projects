@@ -1,0 +1,151 @@
+unit Messages_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmMessages = class(TForm)
+    btnHome: TButton;
+    btnHelp: TButton;
+    pnlDisplay: TPanel;
+    redConversation: TRichEdit;
+    cmbUsers: TComboBox;
+    lblSelect: TLabel;
+    pnlMessage: TPanel;
+    memMessage: TMemo;
+    lblMessage: TLabel;
+    btnSend: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure cmbUsersChange(Sender: TObject);
+    procedure btnSendClick(Sender: TObject);
+  private
+    { Private declarations }
+    iUser : integer;
+    sUser : string;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMessages: TfrmMessages;
+
+implementation
+Uses
+ dmEducation_u, Login_u;
+
+{$R *.dfm}
+
+procedure TfrmMessages.btnSendClick(Sender: TObject);
+var
+ sMessage : string;
+begin
+  if cmbUsers.itemindex < 0 then
+    begin
+      showmessage('Please select a conversation in the combobox above');
+      Exit;
+    end;
+  if memMessage.text = '' then
+    begin
+      showmessage('Please enter a message in the memo above');
+      Exit;
+    end;
+
+  sMessage := memMessage.text;
+  memMessage.lines.clear;
+
+  with dmEducation do
+    begin
+      tblMessages.open;
+      tblMessages.last;
+      tblMessages.insert;
+      tblMessages['From'] := frmLogin.iUserNumber;
+      tblMessages['To'] := iUser;
+      tblMessages['Message'] := sMessage;
+      tblMessages['Date'] := now;
+      tblMessages.post;
+      tblMessages.close;
+    end;
+
+    redConversation.lines.add('YOU(' + Datetostr(now) + '):');
+    redConversation.lines.add(sMessage);
+end;
+
+procedure TfrmMessages.cmbUsersChange(Sender: TObject);
+var
+bFound : boolean;
+begin
+  iUser := strtoint(copy(cmbUsers.text, 1, pos('.', cmbUsers.text) - 1));
+
+  with dmEducation do
+    begin
+      tblUsers.open;
+      tblUsers.first;
+      bFound := false;
+      while not(tblUSers.eof) AND NOT(bFOund) do
+        begin
+          if tblUsers['UserID'] = iUser then
+            begin
+              sUser := tblUsers['UserName'] + ' ' + tblUsers['UserSurname'];
+              bFound := true;
+            end;
+          tblUsers.next;
+        end;
+      tblUsers.close;
+
+      redConversation.lines.clear;
+
+      tblMessages.open;
+      tblMessages.first;
+      while not(tblMessages.eof) do
+        begin
+          if (tblMessages['From'] = frmLogin.iUserNumber) AND (tblMessages['To'] = iUser) then
+            begin
+              redConversation.lines.add('YOU(' + datetostr(tblMessages['Date']) + '):');
+              redConversation.lines.add(Datetostr(tblMessages['Message']));
+            end
+            else if (tblMessages['To'] = frmLogin.iUserNumber) AND (tblMessages['From'] = iUser) then
+            begin
+              redConversation.lines.add(sUser + '(' + datetostr(tblMessages['Date']) + '):');
+              redConversation.lines.add(Datetostr(tblMessages['Message']));
+            end;
+          tblMessages.next;
+        end;
+      tblMessages.close;
+
+      if redConversation.text = '' then
+        begin
+          redConversation.lines.add('There are currently no messages in this conversation' + #13 + 'Enter a message in the memo below to send one');
+        end;
+    end;
+
+
+end;
+
+procedure TfrmMessages.FormShow(Sender: TObject);
+begin
+  cmbUsers.Items.clear;
+  redConversation.lines.clear;
+  memMessage.lines.clear;
+  cmbUsers.style := csDropDownList;
+
+  with dmEducation do
+    begin
+      cmbUsers.items.clear;
+      tblusers.open;
+      tblUsers.first;
+      while not(tblUsers.eof) do
+        begin
+          if NOT(tblUsers['userID'] = frmLogin.iUserNumber) then
+            begin
+              cmbUsers.items.add(inttostr(tblUsers['UserID']) + '. ' + tblUsers['UserName'] + ' ' + tblUsers['UserSurname']);
+            end;
+          tblUsers.next;
+        end;
+     tblUsers.close;
+    end;
+end;
+
+end.

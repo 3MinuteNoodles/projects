@@ -1,0 +1,282 @@
+object frmManageKeywords: TfrmManageKeywords
+  Left = 800
+  Top = 104
+  Caption = 'Manage Keywords'
+  ClientHeight = 548
+  ClientWidth = 381
+  Color = 4536114
+  DoubleBuffered = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnClose = FormClose
+  OnHide = FormHide
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlKeywords: TPanel
+    Left = 8
+    Top = 51
+    Width = 370
+    Height = 496
+    BevelOuter = bvNone
+    TabOrder = 0
+    object lblKeywords: TLabel
+      Left = 8
+      Top = 13
+      Width = 51
+      Height = 13
+      Caption = 'Keywords:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object redKeywords: TRichEdit
+      Left = 8
+      Top = 32
+      Width = 353
+      Height = 353
+      Hint = 'Your list of keywords is displayed here'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ReadOnly = True
+      ScrollBars = ssVertical
+      ShowHint = True
+      TabOrder = 0
+      Zoom = 100
+    end
+    object btnAddKeyword: TButton
+      Left = 8
+      Top = 423
+      Width = 353
+      Height = 25
+      Hint = 'Click here to add a new keyword'
+      Caption = 'Add keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = btnAddKeywordClick
+    end
+    object btnDeleteKeyword: TButton
+      Left = 8
+      Top = 454
+      Width = 353
+      Height = 25
+      Hint = 'Click here to delete an existing keyword'
+      Caption = 'Delete Keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnDeleteKeywordClick
+    end
+  end
+  object pnlDeleteKeyword: TPanel
+    Left = 8
+    Top = 51
+    Width = 370
+    Height = 496
+    BevelOuter = bvNone
+    Color = 4536114
+    Enabled = False
+    ParentBackground = False
+    TabOrder = 1
+    Visible = False
+    object lblDeleteKeywords: TLabel
+      Left = 8
+      Top = 51
+      Width = 139
+      Height = 13
+      Caption = 'Choose a keyword to delete:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnDeleteKeywordFinal: TButton
+      Left = 8
+      Top = 136
+      Width = 353
+      Height = 79
+      Caption = 'Delete Keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btnDeleteKeywordFinalClick
+    end
+    object cmbDeleteKeyword: TComboBox
+      Left = 8
+      Top = 70
+      Width = 353
+      Height = 21
+      Hint = 'Select which keyword you want to delete'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+    end
+    object btnBacktolist: TButton
+      Left = 8
+      Top = 8
+      Width = 118
+      Height = 37
+      Hint = 'Click here to return to the list of keywords'
+      Caption = #11013#65039' Back'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4536114
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnBacktolistClick
+    end
+  end
+  object btnHome: TButton
+    Left = 16
+    Top = 4
+    Width = 118
+    Height = 34
+    Hint = 'Click here to return to the admin home'
+    Caption = #11013#65039' Home'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 4536114
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    OnClick = btnHomeClick
+  end
+  object btnHelp: TBitBtn
+    Left = 297
+    Top = 4
+    Width = 81
+    Height = 33
+    Hint = 'Click here if you are in need of assistance'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Kind = bkHelp
+    NumGlyphs = 2
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+    OnClick = btnHelpClick
+  end
+  object redHelpKeywords: TRichEdit
+    Left = 0
+    Top = 0
+    Width = 381
+    Height = 547
+    Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'General:'
+      ''
+      
+        'All the saved keywords are displayed on the rich edit when you o' +
+        'pen this'
+      'form. You can use the home button to go back to the admin home.'
+      ''
+      'Adding a keyword:'
+      ''
+      
+        'If you wish to add a keyword you can use the "Add keyword" butto' +
+        'n.'
+      
+        'Once you click this button a pop up box will show up that let'#39's ' +
+        'you enter'
+      
+        'the keyword that you want to add. After which you will receive a' +
+        'nother'
+      
+        'popup box where you can enter the weight of the keyword (this we' +
+        'ight'
+      
+        'can be used to determine the severity of finding this keyword ).' +
+        ' If both'
+      
+        'of these are entered correctly then the new keyword will be adde' +
+        'd to'
+      'your list of existing keywords.'
+      ''
+      'Deleting a keyword:'#11
+      ''
+      ''
+      
+        'If you wish to delete a keyword push the "delete keyword" button' +
+        '. This will'
+      
+        'take you to another menu where you can select the keyword you wa' +
+        'nt to'
+      
+        'delete in a combo box. once you are sure that you have selected ' +
+        'the'
+      
+        'keyword you want click the "delete keyword" button. below the co' +
+        'mbo'
+      'box.')
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 4
+    Visible = False
+    Zoom = 100
+  end
+  object btnNotHelp: TButton
+    Left = 144
+    Top = 474
+    Width = 75
+    Height = 25
+    Caption = 'I understand'
+    Enabled = False
+    TabOrder = 5
+    Visible = False
+    OnClick = btnNotHelpClick
+  end
+end

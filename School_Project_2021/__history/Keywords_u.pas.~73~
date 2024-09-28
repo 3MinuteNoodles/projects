@@ -1,0 +1,408 @@
+unit Keywords_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.ExtCtrls, dmdbWhysapp_u, Vcl.Buttons;
+
+type
+  TfrmManageKeywords = class(TForm)
+    pnlKeywords: TPanel;
+    redKeywords: TRichEdit;
+    lblKeywords: TLabel;
+    btnAddKeyword: TButton;
+    btnDeleteKeyword: TButton;
+    pnlDeleteKeyword: TPanel;
+    lblDeleteKeywords: TLabel;
+    btnDeleteKeywordFinal: TButton;
+    cmbDeleteKeyword: TComboBox;
+    btnHome: TButton;
+    btnBacktolist: TButton;
+    btnHelp: TBitBtn;
+    redHelpKeywords: TRichEdit;
+    btnNotHelp: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure btnAddKeywordClick(Sender: TObject);
+    procedure btnDeleteKeywordClick(Sender: TObject);
+    procedure btnDeleteKeywordFinalClick(Sender: TObject);
+    procedure FormHide(Sender: TObject);
+    procedure btnHomeClick(Sender: TObject);
+    procedure btnBacktolistClick(Sender: TObject);
+    procedure btnHelpClick(Sender: TObject);
+    procedure btnNotHelpClick(Sender: TObject);
+  private
+    { Private declarations }
+    ArrKeywords: Array [1 .. 256] of string;
+    arrFound: array [1 .. 256] of boolean;
+    iNumKeywords: integer;
+  public
+    { Public declarations }
+    function DecryptKeyword(sMessage : string) : string;
+  end;
+
+var
+  frmManageKeywords: TfrmManageKeywords;
+
+implementation
+
+{$R *.dfm}
+
+Uses AdminHome_u;
+
+procedure TfrmManageKeywords.btnAddKeywordClick(Sender: TObject);
+var
+  sNewKeyword, sKEyword, shex, sCheckKeyword : string;
+  i, iWeight : integer;
+  bFound, bInvalid : boolean;
+begin
+  //gets keyword from user
+  sKeyword := Inputbox('New Keyword', 'Enter a keyword to add:', '');   \
+
+  if sKeyword = '' then
+    Begin
+      Showmessage('Keyword can not be blank');
+      Exit;
+    End;
+
+  for i := 1 to iNumKeywords do
+    begin
+      sCheckKeyword := Decryptkeyword(ArrKeywords[i]);
+
+      if Uppercase(sKeyword) = Uppercase(COPY(sCheckKeyword, 1, pos('¡', sCheckKeyword) - 1)) then
+        Begin
+          Showmessage('This keyword already exists');
+          Exit;
+        End;
+
+    end;
+
+
+
+  bFound := false;
+
+  sNewKeyword := '';
+  //Checks that keyword is allowed character
+  for i := 1 to Length(sKEyword) do
+    begin
+        if (ORD(sKeyword[i]) < 32) OR (ORD(sKeyword[i]) > 126)then
+        begin
+          bFound := True;
+        end;
+    end;
+
+  if bFOund then
+    begin
+      showmessage('Invalid character(s) entered');
+      Exit;
+    end;
+
+
+  iWeight := -1;
+  while iWeight = -1 do
+    Begin
+      bInvalid := false;
+
+      try
+        iWeight := strtoint(InputBox('New Keyword', 'Enter keyword weight(from 1 to 50):', ''));
+      Except
+        Showmessage('Please enter a number between 1 and 50');
+        bInvalid := True
+      end;
+
+      if ((iWeight < 1) or (iWeight > 50)) and NOT(bInvalid) then
+        begin
+          Showmessage('Please enter a number between 1 and 50');
+          iWeight := -1;
+        end;
+
+      if mrYes <> MessageDlg('Do you still want to continue entering the keyword?', mtConfirmation, [mbYes, mbNO], 0) then
+        Begin
+          showmessage('Cancelled');
+          Exit;
+        End;
+
+    End;
+
+  sKeyword := sKeyword + '¡' + inttostr(iWeight);
+
+  //Encrypts keyword
+  for i := 1 to Length(sKeyword) do
+    begin
+
+      if ord(sKeyword[i]) < 126 then
+        begin
+         shex := inttohex(ord(sKeyword[i]) + 1);
+         delete(shex ,1 ,6);
+         sNewKeyword := sNewKeyword + shex;
+        end
+        else if Ord(sKeyword[i]) = 126 then
+        begin
+         shex := inttohex(ord(sKeyword[i]) - 94);
+         delete(shex ,1 ,6);
+         sNewKeyword := sNewKeyword + shex;
+        end
+        Else
+        Begin
+         shex := inttohex(ord(sKeyword[i]) + 1);
+         delete(shex ,1 ,6);
+         sNewKeyword := sNewKeyword + shex;
+        End;
+
+    end;
+
+
+    //Check that there are not too many keywords
+  if iNumKeywords = 256 then
+  begin
+    showmessage('You have reached the maximum amount of keywords and can not add any more');
+  end
+  else
+  begin
+    //Checks that keyword is not empty
+    if sNewKeyword = '' then
+    Begin
+      showmessage('Please enter a keyword to add');
+    End
+    else
+    begin
+      //Saves keyword to arrkeywords and displays it on rich edit
+      inc(iNumKeywords);
+      ArrKeywords[iNumKeywords] := sNewKeyword;
+      redKeywords.clear;
+      redKeywords.lines.add('Current Keywords: ' + #13 +
+        '_________________________________' + #13);
+      for i := 1 to iNumKeywords do
+      begin
+        sKeyword := Decryptkeyword(ArrKeywords[i]);
+
+        redKeywords.lines.add(COPY(sKeyword, 1, pos('¡', sKeyword) - 1) +'(Weight: ' + COPY(SKeyword, pos('¡', sKeyword) + 1, 2) + ')');
+      end;
+    end;
+
+  end;
+end;
+
+procedure TfrmManageKeywords.btnDeleteKeywordClick(Sender: TObject);
+var
+  i: integer;
+begin
+  //goes to panel where you delete keyword
+  pnlKeywords.Visible := False;
+  pnlKeywords.Enabled := False;
+  pnlDeleteKeyword.Visible := True;
+  pnlDeleteKeyword.Enabled := True;
+  pnlDeleteKeyword.Bringtofront;
+  //populates combo box that holds keywords that you can delete
+  cmbDeleteKeyword.items.clear;
+  for i := 1 to iNumKeywords do
+  begin
+    cmbDeleteKeyword.items.add(COPY(DecryptKeyword(ArrKeywords[i]), 1, pos('¡', DecryptKeyword(ArrKeywords[i])) - 1));
+  end;
+end;
+
+procedure TfrmManageKeywords.btnDeleteKeywordFinalClick(Sender: TObject);
+var
+  i, iEnd: integer;
+  bFound: boolean;
+  sKeyword : string;
+begin
+  iEnd := iNumKeywords;
+  bFound := False;
+  //checks what is selected in combo box and deletes it by moving the values down in the array and decreasing the num keywords variable
+  for i := 1 to iEnd do
+  begin
+    if copy(Decryptkeyword(ArrKeywords[i]), 1, pos('¡', Decryptkeyword(ArrKeywords[i])) - 1) = cmbDeleteKeyword.text then
+    begin
+      bFound := True;
+      ArrKeywords[i] := ArrKeywords[i + 1];
+    end;
+
+    if bFound then
+    begin
+      ArrKeywords[i] := ArrKeywords[i + 1];
+    end;
+  end;
+  dec(iNumKeywords);
+  //repopulates combo box
+  cmbDeleteKeyword.items.clear;
+  cmbDeleteKeyword.text := '';
+
+  for i := 1 to iNumKeywords do
+  begin
+    cmbDeleteKeyword.items.add(COPY(DecryptKeyword(ArrKeywords[i]), 1, pos('¡', DecryptKeyword(ArrKeywords[i])) - 1));
+  end;
+
+  //redisplays all keywords
+  redKeywords.lines.clear;
+  redKeywords.lines.add('Current Keywords: ' + #13 +
+    '_________________________________' + #13);
+  for i := 1 to iNumKeywords do
+  begin
+    sKeyword := Decryptkeyword(ArrKeywords[i]);
+
+    redKeywords.lines.add(COPY(sKeyword, 1, pos('¡', sKeyword) - 1) +'  (Weight: ' + COPY(SKeyword, pos('¡', sKeyword) + 1, 2) + ')');
+  end;
+
+  if iNumKeywords = 0 then
+    begin
+      redKeywords.lines.add('You currently have no keywords saved, you can add one with the add button below.');
+    end;
+end;
+
+procedure TfrmManageKeywords.btnHelpClick(Sender: TObject);
+begin
+  redHelpKeywords.readOnly := True;
+  redHelpkeywords.enabled  := True;
+  redHelpKeywords.visible  := True;
+  btnnotHelp.enabled       := True;
+  btnNothelp.Visible       := True;
+  pnlKeywords.hide;
+  pnlDeleteKeyword.hide;
+end;
+
+procedure TfrmManageKeywords.btnHomeClick(Sender: TObject);
+begin
+  pnlKeywords.bringtofront;
+  pnlKeywords.visible      := true;
+  pnlKeywords.enabled      := True;
+  frmManageKeywords.hide;
+  frmAdminHome.show;
+end;
+
+procedure TfrmManageKeywords.btnNotHelpClick(Sender: TObject);
+begin
+  redHelpkeywords.enabled  := False;
+  redHelpKeywords.visible  := False;
+  btnnotHelp.enabled       := False;
+  btnNothelp.Visible       := False;
+  pnlKeywords.show;
+  pnlDeleteKeyword.show;
+end;
+
+procedure TfrmManageKeywords.btnBacktolistClick(Sender: TObject);
+begin
+  // goes back to panel that contains rich edit which displays keywords
+  pnlKeywords.Visible := True;
+  pnlKeywords.Enabled := True;
+  pnlDeleteKeyword.Visible := False;
+  pnlDeleteKeyword.Enabled := False;
+  pnlKeywords.Bringtofront;
+end;
+
+function TfrmManageKeywords.DecryptKeyword(sMessage: string): string;
+var
+sKeyword, sConvert, spos : string;
+i : integer;
+Epicbyte : byte;
+begin
+   //Decrytps keywords ( from hex )
+   sPOs := '0123456789ABCDEF';
+   skeyword := '';
+
+   for i := 1 to round(length(smessage) / 2) do
+     begin
+       sConvert := copy(sMessage, (2 * i) - 1, 2);
+
+       epicbyte := (16 * (pos(sConvert[1], sPOs) -1)) + (pos(sConvert[2], spos) - 1);
+
+       if epicbyte = 32 then
+         begin
+
+           sKeyword := sKeyword + chr(epicbyte + 94);
+         end
+         else
+         begin
+           sKeyword := sKeyword + chr(epicbyte - 1);
+         end;
+
+     end;
+
+   result := sKeyword;
+end;
+
+procedure TfrmManageKeywords.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+var
+  Tkeywords: textfile;
+  i: integer;
+begin
+  //saves changes to keyword list in textfile
+  assignFile(Tkeywords, 'Keywords.txt');
+  rewrite(Tkeywords);
+  for i := 1 to iNumKeywords do
+  begin
+    writeln(Tkeywords, ArrKeywords[i]);
+  end;
+  closefile(Tkeywords);
+
+  Application.Terminate;
+end;
+
+procedure TfrmManageKeywords.FormHide(Sender: TObject);
+var
+  Tkeywords: textfile;
+  i : integer;
+begin
+  //Saves changes to keyword list in textfile
+  assignFile(Tkeywords, 'Keywords.txt');
+  rewrite(Tkeywords);
+  for i := 1 to iNumKeywords do
+  begin
+    writeln(Tkeywords, ArrKeywords[i]);
+  end;
+  closefile(Tkeywords);
+end;
+
+procedure TfrmManageKeywords.FormShow(Sender: TObject);
+Var
+  Tkeywords: textfile;
+  i: integer;
+  sKeyword : string;
+begin
+  //Fetches all keywords from text file
+  if fileExists('Keywords.txt') = True then
+  Begin
+    redKeywords.lines.clear;
+    iNumKeywords := 0;
+    redKeywords.lines.add('Current Keywords: ' + #13 +
+      '_________________________________' + #13);
+    assignFile(Tkeywords, 'Keywords.txt');
+    Reset(Tkeywords);
+    while not EOF(Tkeywords) do
+    begin
+      inc(iNumKeywords);
+      Readln(Tkeywords, ArrKeywords[iNumKeywords]);
+    end;
+    if ArrKeywords[1] = '' then
+    begin
+      redKeywords.lines.add
+        ('You currently have no keywords saved, you can add one with the add button below.');
+      iNumKeywords := 0;
+    end
+    Else
+    begin
+      for i := 1 to iNumKeywords do
+      begin
+        sKeyword := Decryptkeyword(ArrKeywords[i]);
+
+        redKeywords.lines.add(COPY(sKeyword, 1, pos('¡', sKeyword) - 1) +'  (Weight: ' + COPY(SKeyword, pos('¡', sKeyword) + 1, 2) + ')');
+      end;
+    end;
+  end
+  Else
+  Begin
+    showmessage('Text file containing keywords not found');
+  End;
+
+  closefile(Tkeywords);
+
+  pnlKeywords.Bringtofront;
+
+  cmbDeletekeyword.Style := csOwnerDrawFixed;
+end;
+
+end.

@@ -1,0 +1,18 @@
+program WhysApp_p;
+
+uses
+  Vcl.Forms,
+  Login_u in 'Login_u.pas' {frmLogin},
+  AdminHome_u in 'AdminHome_u.pas' {frmAdminHome},
+  NormalHome_u in 'NormalHome_u.pas' {frmNormalHome};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmAdminHome, frmAdminHome);
+  Application.CreateForm(TfrmNormalHome, frmNormalHome);
+  Application.Run;
+end.

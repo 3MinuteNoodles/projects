@@ -1,0 +1,11 @@
+2,2
+Define: "net profit"
+How much you earn
+the actual profit after working expenses not included in the calculation of gross profit have been paid.
+2,
+2
+Define: "Creditor"
+a person or company to whom money is owing.
+Someone who lends you money
+1,
+1

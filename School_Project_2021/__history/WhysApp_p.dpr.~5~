@@ -1,0 +1,24 @@
+program WhysApp_p;
+
+uses
+  Vcl.Forms,
+  Login_u in 'Login_u.pas' {frmLogin},
+  AdminHome_u in 'AdminHome_u.pas' {frmAdminHome},
+  NormalHome_u in 'NormalHome_u.pas' {frmNormalHome},
+  KeywordMatches_u in 'KeywordMatches_u.pas' {Form1},
+  Users_u in 'Users_u.pas' {Form2},
+  Keywords_u in 'Keywords_u.pas' {Form3};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmAdminHome, frmAdminHome);
+  Application.CreateForm(TfrmNormalHome, frmNormalHome);
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TForm3, Form3);
+  Application.Run;
+end.

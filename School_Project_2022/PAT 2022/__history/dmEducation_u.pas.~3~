@@ -1,0 +1,33 @@
+unit dmEducation_u;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB;
+
+type
+  TdmEducation = class(TDataModule)
+    conEducation: TADOConnection;
+    tblMarks: TADOTable;
+    tblMessages: TADOTable;
+    tblNotes: TADOTable;
+    tblStudentSubjects: TADOTable;
+    tblSubjects: TADOTable;
+    tblTests: TADOTable;
+    tblUsers: TADOTable;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmEducation: TdmEducation;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

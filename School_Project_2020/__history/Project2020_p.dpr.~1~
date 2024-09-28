@@ -1,0 +1,14 @@
+program Project2020_p;
+
+uses
+  Vcl.Forms,
+  Project2020_u in 'Project2020_u.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

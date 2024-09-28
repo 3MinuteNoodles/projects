@@ -1,0 +1,129 @@
+object frmKeywordMatches: TfrmKeywordMatches
+  Left = 800
+  Top = 443
+  Hint = 'Messages containing keywords are displayed here'
+  Caption = 'Keyword Matches'
+  ClientHeight = 556
+  ClientWidth = 404
+  Color = 4536114
+  DoubleBuffered = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  ShowHint = True
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object redKeywordMatches: TRichEdit
+    Left = 8
+    Top = 56
+    Width = 393
+    Height = 497
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ScrollBars = ssVertical
+    TabOrder = 0
+    Zoom = 100
+  end
+  object btnBack: TButton
+    Left = 8
+    Top = 8
+    Width = 118
+    Height = 34
+    Hint = 'Click here to return to admin home'
+    Caption = #11013#65039' Home'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 4536114
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnBackClick
+  end
+  object btnHelp: TBitBtn
+    Left = 320
+    Top = 8
+    Width = 81
+    Height = 33
+    Hint = 'Click here if you are in need of assistance'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Kind = bkHelp
+    NumGlyphs = 2
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    OnClick = btnHelpClick
+  end
+  object redHelpKeywordMatches: TRichEdit
+    Left = 0
+    Top = 0
+    Width = 401
+    Height = 550
+    Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'General:'
+      ''
+      
+        'On this form all messages between all users are checked to see i' +
+        'f they'
+      
+        'contain keywords and if they do then they are displayed on the r' +
+        'ich edit.'
+      
+        'Along with the message, the date sent, the users who went and re' +
+        'ceived'
+      
+        'the message, the keywords found and the weight of these keywords' +
+        ' are'
+      'also displayed.'
+      ''
+      'Weight:'
+      ''
+      
+        'Each message that is displayed is given a weight based on which ' +
+        'keywords'
+      
+        'were detected in the message. The weight of each keyword is dete' +
+        'rmined'
+      
+        'when the admin adds new keywords. This weight can be used to tel' +
+        'l how'
+      'severe the keyword matches in the message are.')
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 3
+    Visible = False
+    Zoom = 100
+  end
+  object btnNotHelp: TButton
+    Left = 160
+    Top = 488
+    Width = 75
+    Height = 25
+    Caption = 'I understand'
+    Enabled = False
+    TabOrder = 4
+    Visible = False
+    OnClick = btnNotHelpClick
+  end
+end

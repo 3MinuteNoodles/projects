@@ -1,0 +1,61 @@
+unit Messages_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmMessages = class(TForm)
+    btnHome: TButton;
+    btnHelp: TButton;
+    pnlDisplay: TPanel;
+    redConversation: TRichEdit;
+    cmbUsers: TComboBox;
+    lblSelect: TLabel;
+    pnlMessage: TPanel;
+    memMessage: TMemo;
+    lblMessage: TLabel;
+    btnSend: TButton;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMessages: TfrmMessages;
+
+implementation
+Uses
+ dmEducation_u, Login_u;
+
+{$R *.dfm}
+
+procedure TfrmMessages.FormShow(Sender: TObject);
+begin
+  cmbUsers.Items.clear;
+  redConversation.lines.clear;
+  memMessage.lines.clear;
+
+  with dmEducation do
+    begin
+      cmbUsers.items.clear;
+      tblusers.open;
+      tblUsers.first;
+      while not(tblUsers.eof) do
+        begin
+          if NOT(tblUsers['userID'] = frmLogin.iUserNumber) then
+            begin
+              cmbUsers.items.add(inttostr(tblUsers['UserID']) + '. ' + tblUsers['UserName'] + ' ' + tblUsers['UserSurname']);
+            end;
+          tblUsers.next;
+        end;
+     tblUsers.close;
+    end;
+  //
+end;
+
+end.

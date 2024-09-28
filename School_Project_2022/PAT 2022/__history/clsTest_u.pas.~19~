@@ -1,0 +1,140 @@
+﻿unit clsTest_u;
+
+interface
+
+Uses
+ Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+Type
+TTest = Class(TObject)
+
+Private
+  fNumQuestions, fNumAnswers, fScore : integer;
+  farrQuestions : array of String;
+  farrAnswers : array of array of string;
+  farrCorrect : array of String;
+  farrPoints : array of integer;
+Public
+  Constructor Create(sFile : string);
+  Function getQuestion(iNum : integer) : String;
+  Function getAnswers(iNum : integer) : string;
+  Function getCorrect(iNum : integer) : String;
+  Function getNumQuestions : integer;
+  Function getNumAnswers : integer;
+  Function getScore : integer;
+  Function getPoints(iNum : integer) : integer;
+  Function getCumulativePoints(iQuestion : integer) : integer;
+  Procedure incScore(iNum: integer);
+
+End;
+
+implementation
+Uses sTest_u;
+
+{ TTest }
+
+constructor TTest.Create(sFile : string);
+var
+ tFile : textfile;
+ sLine : string;
+ iComma, i, j : integer;
+begin
+  AssignFile(tFile, sFile);
+  if not(fileExists(sFile)) then
+    begin
+      Showmessage('There was a problem fetching this test');
+      frmsTests.pnlSelectTest.Bringtofront;
+      Exit;
+    end;
+
+  reset(tFile);
+  readln(tFile, sLine);  //busy here
+  iComma := pos(',', sLine);
+  fNumQuestions := strtoint(copy(sLIne, 1, iComma - 1));
+  fNumAnswers :=  strtoint(copy(sLine, iComma + 1, Length(sLIne) - iComma));
+  SetLength(farrQuestions, fNumQuestions);
+  SetLength(farrCorrect, fNumQuestions);
+  Setlength(farrAnswers, fNumQuestions);
+  SetLength(farrPoints,  fNumQuestions);
+
+  for i := 0 to fNumQuestions - 1 do
+    begin
+      SetLength(farrAnswers[i], fNumQuestions);
+    end;
+
+  for i := 0 to fNumQuestions - 1 do
+    begin
+      readln(tFile, farrQuestions[i]);
+      for j := 0 to fNumAnswers - 1 do
+        begin
+          readln(tFile, farrAnswers[i,j]);
+        end;
+      readln(tFile, farrCorrect[i]);
+      readln(tFile, farrPoints[i]);
+    end;
+
+  fScore := 0;
+end;
+
+function TTest.getAnswers(iNum: integer): string;
+var
+ i : integer;
+ sResult : String;
+begin
+  sResult := '';
+  for i := 0 to fNumAnswers - 1 do
+    begin
+      sResult := sResult + farrAnswers[iNum, i] +  'ǝ';
+    end;
+  Result := sResult;
+end;
+
+function TTest.getCorrect(iNum: integer): String;
+begin
+  Result := farrCorrect[iNum];
+end;
+
+function TTest.getCumulativePoints(iQuestion: integer): integer;
+var
+ iCummulativePoints : integer;
+  i: Integer;
+begin
+  iCummulativePOints := 0;
+  for i := 0 to iQuestion-1  do
+    Begin
+      iCummulativePoints := iCummulativePoints + getPoints(i);
+    End;
+end;
+
+function TTest.getNumAnswers: integer;
+begin
+  Result := fNumAnswers;
+end;
+
+function TTest.getNumQuestions: integer;
+begin
+  Result := fNumQuestions - 1;
+end;
+
+function TTest.getPoints(iNum : integer) : integer;
+begin
+  Result := farrPoints[iNum];
+end;
+
+function TTest.getScore: integer;
+begin
+  Result := fsCore;
+end;
+
+function TTest.getQuestion(iNum: integer): String;
+begin
+  Result := farrQuestions[iNum];
+end;
+
+procedure TTest.incScore(iNum: integer);
+begin
+  inc(fScore, iNum);
+end;
+
+end.

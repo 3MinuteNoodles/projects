@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/08/31 12:25:31.000.282,=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/31 12:28:08.000.682,C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Whysapp_u.dfm=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2021/08/31 12:28:08.000.682,C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Whysapp_u.pas=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/31 12:28:17.000.645,C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\WhysApp_p.dproj=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/08/31 12:29:16.000.038,=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Unit2.pas</Transaction>
+    <Transaction>2021/08/31 12:34:04.000.877,=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Unit2.pas</Transaction>
+    <Transaction>2021/08/31 12:34:53.000.043,C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Frm2_u.dfm=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Unit2.dfm</Transaction>
+    <Transaction>2021/08/31 12:34:53.000.043,C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Frm2_u.pas=C:\Users\ttred\OneDrive\Documents\Embarcadero\Studio\Projects\Project\Unit2.pas</Transaction>
+    <Transaction>2021/10/10 22:09:27.000.584,F:\Pat\Project\Whysapp_u.dfm=F:\Pat\Project\Login_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:09:27.000.584,F:\Pat\Project\Whysapp_u.pas=F:\Pat\Project\Login_u.pas</Transaction>
+    <Transaction>2021/10/10 22:09:42.000.731,F:\Pat\Project\Frm2_u.dfm=F:\Pat\Project\AdminHome_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:09:42.000.731,F:\Pat\Project\Frm2_u.pas=F:\Pat\Project\AdminHome_u.pas</Transaction>
+    <Transaction>2021/10/10 22:09:58.000.868,=F:\Pat\Project\Unit1.pas</Transaction>
+    <Transaction>2021/10/10 22:10:26.000.602,F:\Pat\Project\Unit1.dfm=F:\Pat\Project\NormalHome_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:10:26.000.602,F:\Pat\Project\Unit1.pas=F:\Pat\Project\NormalHome_u.pas</Transaction>
+    <Transaction>2021/10/10 22:42:59.000.584,=F:\Pat\Project\Unit1.pas</Transaction>
+    <Transaction>2021/10/10 22:43:06.000.450,=F:\Pat\Project\Unit2.pas</Transaction>
+    <Transaction>2021/10/10 22:43:12.000.114,=F:\Pat\Project\Unit3.pas</Transaction>
+    <Transaction>2021/10/10 22:48:26.000.130,F:\Pat\Project\Unit1.pas=F:\Pat\Project\Keywords_u.pas</Transaction>
+    <Transaction>2021/10/10 22:48:26.000.130,F:\Pat\Project\Unit1.dfm=F:\Pat\Project\Keywords_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:48:42.000.390,F:\Pat\Project\Unit2.dfm=F:\Pat\Project\Users_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:48:42.000.390,F:\Pat\Project\Unit2.pas=F:\Pat\Project\Users_u.pas</Transaction>
+    <Transaction>2021/10/10 22:48:58.000.124,F:\Pat\Project\Unit3.dfm=F:\Pat\Project\KeywordMatches_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:48:58.000.124,F:\Pat\Project\Unit3.pas=F:\Pat\Project\KeywordMatches_u.pas</Transaction>
+    <Transaction>2021/10/10 22:55:04.000.273,F:\Pat\Project\Keywords_u.dfm=F:\Pat\Project\Keywor2ds_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:55:04.000.273,F:\Pat\Project\Keywords_u.pas=F:\Pat\Project\Keywor2ds_u.pas</Transaction>
+    <Transaction>2021/10/10 22:55:15.000.600,F:\Pat\Project\KeywordMatches_u.pas=F:\Pat\Project\Keywords_u.pas</Transaction>
+    <Transaction>2021/10/10 22:55:15.000.600,F:\Pat\Project\KeywordMatches_u.dfm=F:\Pat\Project\Keywords_u.dfm</Transaction>
+    <Transaction>2021/10/10 22:55:26.000.080,F:\Pat\Project\Keywor2ds_u.pas=F:\Pat\Project\KeywordMatches_u.pas</Transaction>
+    <Transaction>2021/10/10 22:55:26.000.080,F:\Pat\Project\Keywor2ds_u.dfm=F:\Pat\Project\KeywordMatches_u.dfm</Transaction>
+    <Transaction>2021/10/17 17:58:08.000.952,=F:\Pat\Project\Unit1.pas</Transaction>
+    <Transaction>2021/10/17 18:00:27.000.116,F:\Pat\Project\Unit1.pas=F:\Pat\Project\dmdbWhysapp_u.pas</Transaction>
+    <Transaction>2021/10/17 18:00:27.000.116,F:\Pat\Project\Unit1.dfm=F:\Pat\Project\dmdbWhysapp_u.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Login_u.pas"/>
+    <File Path="Login_u.dfm"/>
+    <File Path="NormalHome_u.pas"/>
+    <File Path="NormalHome_u.dfm"/>
+    <File Path="AdminHome_u.pas"/>
+    <File Path="AdminHome_u.dfm"/>
+    <File Path="KeywordMatches_u.pas"/>
+    <File Path="KeywordMatches_u.dfm"/>
+    <File Path="Users_u.pas"/>
+    <File Path="Users_u.dfm"/>
+    <File Path="Keywords_u.pas"/>
+    <File Path="Keywords_u.dfm"/>
+    <File Path="dmdbWhysapp_u.pas"/>
+    <File Path="dmdbWhysapp_u.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

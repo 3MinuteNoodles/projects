@@ -1,0 +1,25 @@
+4,3
+Define "vaticinate"
+to foretell or predict
+to innoculate against a disease
+to sing
+1,
+6
+Define "iatrogenic"
+lethargic
+sickly
+caused by the diagnosis, manner, or treatment of a physician
+3,
+4
+Define "wizen"
+to wither; shrivel; dry up
+scholarly knowledge or learning
+a wise act or saying
+1,
+1
+Define "run". Select all correct options
+to go quickly by moving the legs more rapidly than at a walk and in such a manner that for an instant in each step all or both feet are off the ground
+to walk with a leisurely gait; stroll
+to move with haste; act quickly
+1,3,
+2

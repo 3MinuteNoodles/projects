@@ -1,0 +1,476 @@
+object frmsTests: TfrmsTests
+  Left = 353
+  Top = 326
+  Caption = 'Tests'
+  ClientHeight = 360
+  ClientWidth = 483
+  Color = 4601906
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnHome: TButton
+    Left = 8
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Home'
+    TabOrder = 0
+    OnClick = btnHomeClick
+  end
+  object btnHelp: TButton
+    Left = 401
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Help'
+    TabOrder = 1
+  end
+  object pnlSelectTest: TPanel
+    Left = 8
+    Top = 206
+    Width = 468
+    Height = 75
+    TabOrder = 2
+    object lblTests: TLabel
+      Left = 35
+      Top = 16
+      Width = 101
+      Height = 13
+      Caption = 'Select a test to take:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object cmbTests: TComboBox
+      Left = 158
+      Top = 15
+      Width = 263
+      Height = 21
+      TabOrder = 0
+    end
+    object btnTakeTest: TButton
+      Left = 158
+      Top = 42
+      Width = 138
+      Height = 25
+      Caption = 'Take selected test'
+      TabOrder = 1
+      OnClick = btnTakeTestClick
+    end
+  end
+  object pnlSearch: TPanel
+    Left = 8
+    Top = 55
+    Width = 468
+    Height = 145
+    TabOrder = 3
+    object lblSearch: TLabel
+      Left = 35
+      Top = 16
+      Width = 112
+      Height = 13
+      Caption = 'Enter a term to search:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblFilters: TLabel
+      Left = 35
+      Top = 56
+      Width = 81
+      Height = 13
+      Caption = 'Additional filters:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSubjects: TLabel
+      Left = 55
+      Top = 90
+      Width = 161
+      Height = 13
+      Caption = 'Show only tests for your subjects'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSSubject: TLabel
+      Left = 35
+      Top = 120
+      Width = 112
+      Height = 13
+      Caption = 'Only show this subject:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edtSearch: TEdit
+      Left = 158
+      Top = 13
+      Width = 263
+      Height = 21
+      TabOrder = 0
+      OnExit = edtSearchEnter
+    end
+    object btnTitle: TButton
+      Left = 158
+      Top = 46
+      Width = 75
+      Height = 35
+      Caption = 'Sort by title'
+      TabOrder = 1
+      OnClick = btnTitleClick
+    end
+    object btnDate: TButton
+      Left = 252
+      Top = 46
+      Width = 75
+      Height = 35
+      Caption = 'Sort by date (Newest First)'
+      TabOrder = 2
+      WordWrap = True
+      OnClick = btnDateClick
+    end
+    object btnTeacher: TButton
+      Left = 346
+      Top = 46
+      Width = 75
+      Height = 35
+      Caption = 'Sort by teacher'
+      TabOrder = 3
+      WordWrap = True
+      OnClick = btnTeacherClick
+    end
+    object chkSubject: TCheckBox
+      Left = 35
+      Top = 89
+      Width = 14
+      Height = 17
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 4
+      WordWrap = True
+      OnClick = chkSubjectClick
+    end
+    object cmbSubjects: TComboBox
+      Left = 158
+      Top = 117
+      Width = 263
+      Height = 21
+      TabOrder = 5
+      OnChange = cmbSubjectsChange
+    end
+    object btnSearch: TButton
+      Left = 427
+      Top = 11
+      Width = 28
+      Height = 25
+      Caption = #8594
+      TabOrder = 6
+      OnClick = btnSearchClick
+    end
+  end
+  object pnltest: TPanel
+    Left = 8
+    Top = 55
+    Width = 468
+    Height = 282
+    TabOrder = 4
+    object lblQuestion: TLabel
+      Left = 14
+      Top = 29
+      Width = 47
+      Height = 13
+      Caption = 'Question:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblA1: TLabel
+      Left = 14
+      Top = 78
+      Width = 45
+      Height = 13
+      Caption = 'Option 1:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblA2: TLabel
+      Left = 14
+      Top = 113
+      Width = 45
+      Height = 13
+      Caption = 'Option 2:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblA3: TLabel
+      Left = 14
+      Top = 147
+      Width = 45
+      Height = 13
+      Caption = 'Option 3:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblA4: TLabel
+      Left = 14
+      Top = 183
+      Width = 45
+      Height = 13
+      Caption = 'Option 4:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblA5: TLabel
+      Left = 14
+      Top = 218
+      Width = 45
+      Height = 13
+      Caption = 'Option 5:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblSelect: TLabel
+      Left = 153
+      Top = 11
+      Width = 171
+      Height = 13
+      Caption = 'Select the correct answer(s) below:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnSubmit: TButton
+      Left = 164
+      Top = 248
+      Width = 132
+      Height = 25
+      Caption = 'Next Question'
+      TabOrder = 0
+      OnClick = btnSubmitClick
+    end
+    object chk1: TCheckBox
+      Left = 406
+      Top = 76
+      Width = 14
+      Height = 19
+      TabOrder = 1
+    end
+    object chk2: TCheckBox
+      Left = 406
+      Top = 112
+      Width = 19
+      Height = 17
+      TabOrder = 2
+    end
+    object chk3: TCheckBox
+      Left = 406
+      Top = 146
+      Width = 19
+      Height = 17
+      TabOrder = 3
+    end
+    object chk4: TCheckBox
+      Left = 406
+      Top = 183
+      Width = 19
+      Height = 17
+      TabOrder = 4
+    end
+    object chk5: TCheckBox
+      Left = 406
+      Top = 216
+      Width = 19
+      Height = 17
+      TabOrder = 5
+    end
+    object memQuestion: TMemo
+      Left = 81
+      Top = 26
+      Width = 312
+      Height = 20
+      Lines.Strings = (
+        'memQuestion')
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 6
+    end
+    object memOption1: TMemo
+      Left = 81
+      Top = 75
+      Width = 312
+      Height = 20
+      Lines.Strings = (
+        'Memo1')
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 7
+    end
+    object memOption2: TMemo
+      Left = 81
+      Top = 110
+      Width = 312
+      Height = 20
+      Lines.Strings = (
+        'Memo1')
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 8
+    end
+    object memOption3: TMemo
+      Left = 81
+      Top = 145
+      Width = 312
+      Height = 20
+      Lines.Strings = (
+        'Memo1')
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 9
+    end
+    object memOption4: TMemo
+      Left = 81
+      Top = 180
+      Width = 312
+      Height = 20
+      Lines.Strings = (
+        'Memo1')
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 10
+    end
+    object memOption5: TMemo
+      Left = 81
+      Top = 215
+      Width = 312
+      Height = 20
+      Lines.Strings = (
+        'Memo1')
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 11
+    end
+  end
+  object pnlResults: TPanel
+    Left = 8
+    Top = 73
+    Width = 468
+    Height = 245
+    TabOrder = 5
+    object lblScore: TLabel
+      Left = 6
+      Top = 13
+      Width = 3
+      Height = 13
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object redResults: TRichEdit
+      Left = 6
+      Top = 32
+      Width = 456
+      Height = 178
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ScrollBars = ssBoth
+      TabOrder = 0
+      Zoom = 100
+    end
+    object btnMenu: TButton
+      Left = 192
+      Top = 216
+      Width = 75
+      Height = 25
+      Caption = 'Back to menu'
+      TabOrder = 1
+      OnClick = btnMenuClick
+    end
+  end
+  object RichEdit1: TRichEdit
+    Left = 8
+    Top = 8
+    Width = 468
+    Height = 342
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'RichEdit1')
+    ParentFont = False
+    TabOrder = 6
+    Zoom = 100
+  end
+  object btnUnderstood: TButton
+    Left = 200
+    Top = 296
+    Width = 75
+    Height = 25
+    Caption = 'I Understand'
+    TabOrder = 7
+  end
+end

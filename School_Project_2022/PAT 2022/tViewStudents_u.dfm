@@ -1,0 +1,165 @@
+object frmViewStudents: TfrmViewStudents
+  Left = 353
+  Top = 233
+  Caption = 'View Students'
+  ClientHeight = 414
+  ClientWidth = 547
+  Color = 4667697
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindow
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblSInfo: TLabel
+    Left = 8
+    Top = 42
+    Width = 235
+    Height = 13
+    Caption = 'Select a student below to view more information:'
+    Color = 4799279
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object lblSubjects: TLabel
+    Left = 8
+    Top = 162
+    Width = 137
+    Height = 13
+    Caption = 'Selected Student'#39's Subjects:'
+    Color = 4733488
+    ParentColor = False
+  end
+  object lblMarks: TLabel
+    Left = 8
+    Top = 282
+    Width = 124
+    Height = 13
+    Caption = 'Selected Student'#39's Marks:'
+    Color = 4799279
+    ParentColor = False
+  end
+  object btnHelp: TButton
+    Left = 462
+    Top = 5
+    Width = 75
+    Height = 25
+    Caption = 'Help'
+    TabOrder = 0
+    OnClick = btnHelpClick
+  end
+  object btnHome: TButton
+    Left = 8
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Home'
+    TabOrder = 1
+    OnClick = btnHomeClick
+  end
+  object dbgStudents: TDBGrid
+    Left = 8
+    Top = 61
+    Width = 529
+    Height = 94
+    DataSource = dmEducation.dsrUsers
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNone
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindow
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnCellClick = dbgStudentsCellClick
+  end
+  object dbgSubjects: TDBGrid
+    Left = 8
+    Top = 181
+    Width = 529
+    Height = 94
+    DataSource = dmEducation.dsrSubjects
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNone
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindow
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object dbgMarks: TDBGrid
+    Left = 8
+    Top = 301
+    Width = 529
+    Height = 94
+    DataSource = dmEducation.dsrMarks
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNone
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindow
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object redHelp: TRichEdit
+    Left = 8
+    Top = 4
+    Width = 529
+    Height = 399
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      
+        'In this form you can see the marks for each student and what sub' +
+        'jects they take.'
+      ''
+      
+        'Click on a user in the top dbGrid and the details concerning tha' +
+        't user will be displayed.'
+      ''
+      
+        'If the user takes no subjects or has no marks for tests they hav' +
+        'e taken, then the dbGrid'
+      'corresponding to that will be left blank.')
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 5
+    Zoom = 100
+  end
+  object btnUnderstood: TButton
+    Left = 240
+    Top = 352
+    Width = 75
+    Height = 25
+    Caption = 'I Understand'
+    TabOrder = 6
+    OnClick = btnUnderstoodClick
+  end
+end

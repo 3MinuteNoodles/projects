@@ -1,0 +1,108 @@
+object dmEducation: TdmEducation
+  OldCreateOrder = False
+  Height = 339
+  Width = 765
+  object conEducation: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Etienne\Do' +
+      'cuments\School\IT\Pat 2022\Pat save 2\PAT 2022\Win32\Debug\dmEdu' +
+      'cation.mdb;Mode=ReadWrite;Persist Security Info=False'
+    LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 40
+    Top = 116
+  end
+  object tblMarks: TADOTable
+    Active = True
+    Connection = conEducation
+    CursorType = ctStatic
+    TableName = 'tblMarks'
+    Left = 188
+    Top = 56
+  end
+  object tblMessages: TADOTable
+    Active = True
+    Connection = conEducation
+    CursorType = ctStatic
+    TableName = 'tblMessages'
+    Left = 350
+    Top = 56
+  end
+  object tblNotes: TADOTable
+    Active = True
+    Connection = conEducation
+    CursorType = ctStatic
+    TableName = 'tblNotes'
+    Left = 597
+    Top = 56
+  end
+  object tblStudentSubjects: TADOTable
+    Active = True
+    Connection = conEducation
+    CursorType = ctStatic
+    TableName = 'tblStudentSubjects'
+    Left = 267
+    Top = 56
+  end
+  object tblSubjects: TADOTable
+    Active = True
+    Connection = conEducation
+    CursorType = ctStatic
+    TableName = 'tblSubjects'
+    Left = 419
+    Top = 56
+  end
+  object tblTests: TADOTable
+    Active = True
+    Connection = conEducation
+    CursorType = ctStatic
+    TableName = 'tblTests'
+    Left = 539
+    Top = 56
+  end
+  object tblUsers: TADOTable
+    Active = True
+    Connection = conEducation
+    CursorType = ctStatic
+    TableName = 'tblUsers'
+    Left = 478
+    Top = 56
+  end
+  object qryUsers: TADOQuery
+    Connection = conEducation
+    Parameters = <>
+    SQL.Strings = (
+      'f')
+    Left = 480
+    Top = 184
+  end
+  object dsrUsers: TDataSource
+    DataSet = qryUsers
+    Left = 480
+    Top = 120
+  end
+  object qrySubjects: TADOQuery
+    Connection = conEducation
+    Parameters = <>
+    Left = 264
+    Top = 183
+  end
+  object qryMarks: TADOQuery
+    Connection = conEducation
+    Parameters = <>
+    Left = 184
+    Top = 184
+  end
+  object dsrSubjects: TDataSource
+    DataSet = qrySubjects
+    Left = 264
+    Top = 128
+  end
+  object dsrMarks: TDataSource
+    DataSet = qryMarks
+    Left = 184
+    Top = 128
+  end
+end

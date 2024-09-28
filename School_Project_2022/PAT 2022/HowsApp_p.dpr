@@ -1,0 +1,37 @@
+program HowsApp_p;
+
+uses
+  Vcl.Forms,
+  Login_u in 'Login_u.pas' {frmLogin},
+  TeacherHome_u in 'TeacherHome_u.pas' {frmTeacherHome},
+  sTest_u in 'sTest_u.pas' {frmsTests},
+  sMarks_u in 'sMarks_u.pas' {frmsMarks},
+  Profile_u in 'Profile_u.pas' {frmProfile},
+  tTest_u in 'tTest_u.pas' {frmtTest},
+  tNotes_u in 'tNotes_u.pas' {frmtNotes},
+  sNotes_u in 'sNotes_u.pas' {frmsNotes},
+  StudentHome_u in 'StudentHome_u.pas' {frmStudentHome},
+  Messages_u in 'Messages_u.pas' {frmMessages},
+  tViewStudents_u in 'tViewStudents_u.pas' {frmViewStudents},
+  dmEducation_u in 'dmEducation_u.pas' {dmEducation: TDataModule},
+  clsTest_u in 'clsTest_u.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmTeacherHome, frmTeacherHome);
+  Application.CreateForm(TfrmsTests, frmsTests);
+  Application.CreateForm(TfrmsMarks, frmsMarks);
+  Application.CreateForm(TfrmProfile, frmProfile);
+  Application.CreateForm(TfrmtTest, frmtTest);
+  Application.CreateForm(TfrmtNotes, frmtNotes);
+  Application.CreateForm(TfrmsNotes, frmsNotes);
+  Application.CreateForm(TfrmStudentHome, frmStudentHome);
+  Application.CreateForm(TfrmMessages, frmMessages);
+  Application.CreateForm(TfrmViewStudents, frmViewStudents);
+  Application.CreateForm(TdmEducation, dmEducation);
+  Application.Run;
+end.

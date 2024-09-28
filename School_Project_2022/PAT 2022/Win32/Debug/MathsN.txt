@@ -1,0 +1,7 @@
+The order of operations is a rule that tells
+the correct sequence of steps for evaluating
+a math expression. We can remember the order
+using PEMDAS: Parentheses, Exponents, 
+Multiplication and Division (from left to
+right), Addition and Subtraction (from left
+to right).

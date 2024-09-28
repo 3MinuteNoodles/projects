@@ -1,0 +1,459 @@
+object FrmWhosApp: TFrmWhosApp
+  Left = 342
+  Top = 110
+  Caption = 'WHO'#39'S APP'
+  ClientHeight = 485
+  ClientWidth = 670
+  Color = clBackground
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlTop: TPanel
+    Left = 0
+    Top = 0
+    Width = 670
+    Height = 81
+    Hint = 'Endorsed by MR. Dills Ultimate Fanmail Service'
+    Caption = 'Who'#39'sApp secure instant messaging service'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clLime
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object pnlDevice1: TPanel
+    Left = 8
+    Top = 87
+    Width = 307
+    Height = 373
+    TabOrder = 1
+    object lblCharacters1: TLabel
+      Left = 112
+      Top = 275
+      Width = 82
+      Height = 13
+      AutoSize = False
+      Caption = '0/60 characters'
+      Color = clBtnFace
+      ParentColor = False
+      Transparent = False
+    end
+    object lblHeading1: TLabel
+      Left = 72
+      Top = 8
+      Width = 162
+      Height = 52
+      Caption = 'Device 1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -43
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
+    end
+    object pnlScreen1: TPanel
+      Left = 0
+      Top = 76
+      Width = 307
+      Height = 151
+      Color = clSkyBlue
+      ParentBackground = False
+      TabOrder = 0
+      object lbl1Sent1: TLabel
+        Left = 32
+        Top = 102
+        Width = 265
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl1Received2: TLabel
+        Left = 8
+        Top = 56
+        Width = 257
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl1Sent3: TLabel
+        Left = 32
+        Top = 8
+        Width = 265
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl1Received3: TLabel
+        Left = 8
+        Top = 9
+        Width = 257
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl1Sent2: TLabel
+        Left = 32
+        Top = 55
+        Width = 265
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl1Received1: TLabel
+        Left = 8
+        Top = 103
+        Width = 257
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+    end
+    object edtMessage1: TEdit
+      Left = 8
+      Top = 233
+      Width = 291
+      Height = 40
+      Hint = 
+        'Enter Message here(see help for list of letters that can be ente' +
+        'red)'
+      AutoSize = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = edtMessage1Change
+    end
+    object btnSend1: TButton
+      Left = 8
+      Top = 294
+      Width = 75
+      Height = 35
+      Hint = 'You can only send encoded messages'
+      Caption = 'Send'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnSend1Click
+    end
+    object btnDecryptRecievedMessages1: TButton
+      Left = 224
+      Top = 294
+      Width = 75
+      Height = 35
+      Hint = 'Decrypts all sent and reiceved messages'
+      Caption = 'Decrypt all messages'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      WordWrap = True
+      OnClick = btnDecryptRecievedMessages1Click
+    end
+    object btnHelp1: TButton
+      Left = 112
+      Top = 335
+      Width = 83
+      Height = 36
+      Hint = 'If in need of help click here'
+      Caption = 'Help/Info'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnClick = btnHelp1Click
+    end
+    object btnEncode1: TButton
+      Left = 112
+      Top = 294
+      Width = 83
+      Height = 35
+      Hint = 'Encodes/decodes message you are typing'
+      Caption = 'Encode/decode message'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      WordWrap = True
+      OnClick = btnEncode1Click
+    end
+  end
+  object pnlDevice2: TPanel
+    Left = 355
+    Top = 87
+    Width = 307
+    Height = 373
+    TabOrder = 2
+    object lblCharacters2: TLabel
+      Left = 112
+      Top = 275
+      Width = 82
+      Height = 13
+      AutoSize = False
+      Caption = '0/60 characters'
+      Transparent = False
+    end
+    object lblHeading2: TLabel
+      Left = 72
+      Top = 8
+      Width = 162
+      Height = 52
+      Caption = 'Device 2'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -43
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
+    end
+    object pnlScreen2: TPanel
+      Left = 0
+      Top = 76
+      Width = 307
+      Height = 151
+      Color = clSkyBlue
+      ParentBackground = False
+      TabOrder = 0
+      object lbl2Sent1: TLabel
+        Left = 32
+        Top = 102
+        Width = 265
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl2Received2: TLabel
+        Left = 8
+        Top = 56
+        Width = 257
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl2Sent3: TLabel
+        Left = 32
+        Top = 8
+        Width = 265
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl2Received3: TLabel
+        Left = 8
+        Top = 8
+        Width = 257
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl2Sent2: TLabel
+        Left = 32
+        Top = 55
+        Width = 265
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+      object lbl2Received1: TLabel
+        Left = 8
+        Top = 103
+        Width = 257
+        Height = 41
+        AutoSize = False
+        Color = clMoneyGreen
+        ParentColor = False
+        Transparent = False
+        WordWrap = True
+      end
+    end
+    object edtMessage2: TEdit
+      Left = 8
+      Top = 233
+      Width = 291
+      Height = 40
+      Hint = 
+        'Enter Message here(see help for list of letters that can be ente' +
+        'red)'
+      AutoSize = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = edtMessage2Change
+    end
+    object btnSend2: TButton
+      Left = 8
+      Top = 294
+      Width = 75
+      Height = 35
+      Hint = 'You can only send encoded messages'
+      Caption = 'Send'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnSend2Click
+    end
+    object btnDecryptRecievedMessage2: TButton
+      Left = 224
+      Top = 294
+      Width = 75
+      Height = 35
+      Hint = 'Decrypts all sent and reiceved messages'
+      Caption = 'Decrypt all messages'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      WordWrap = True
+      OnClick = btnDecryptRecievedMessage2Click
+    end
+    object btnHelp2: TButton
+      Left = 112
+      Top = 335
+      Width = 83
+      Height = 36
+      Hint = 'If in need of help click here'
+      Caption = 'Help'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnClick = btnHelp2Click
+    end
+    object btnEncode2: TButton
+      Left = 112
+      Top = 294
+      Width = 83
+      Height = 35
+      Hint = 'Encodes/decodes message you are typing'
+      Caption = 'Encode/decode message'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      WordWrap = True
+      OnClick = btnEncode2Click
+    end
+  end
+  object memHelp1: TMemo
+    Left = 8
+    Top = 87
+    Width = 307
+    Height = 373
+    Lines.Strings = (
+      'Welcome to Who'#39'sApp secure instant messaging service!!!'
+      ''
+      'You can send a message to you friend by typing it into'
+      'the text box below the screen.'
+      ''
+      'The messages that you type must consist of only: letters,'
+      'commas, full stops, question marks, exclaimation marks and'
+      'spaces'
+      ''
+      'The "send" button will send the message to your friend but'
+      'can only be used if your message is encrypted.'
+      ''
+      'The "Encode/Decode Message" button can be used to '
+      'encrypt the message you are busy working on. The message '
+      'can not be changed while it is encrypted. Don'#39't worry if you'
+      'encrypt the message and then want to change it, you can '
+      'just press the button again to decrypt the message and '
+      'continue working on it.'
+      ''
+      'The "Decrypt all messages" button will decrypt all the sent '
+      'and recieved messages on your screen.')
+    ReadOnly = True
+    TabOrder = 3
+    Visible = False
+  end
+  object btnUnderstood1: TButton
+    Left = 120
+    Top = 413
+    Width = 83
+    Height = 25
+    Caption = 'I understand'
+    Enabled = False
+    TabOrder = 4
+    Visible = False
+    OnClick = btnUnderstood1Click
+  end
+  object memHelp2: TMemo
+    Left = 355
+    Top = 87
+    Width = 307
+    Height = 373
+    Lines.Strings = (
+      'Welcome to Who'#39'sApp secure instant messaging service!!!'
+      ''
+      'You can send a message to you friend by typing it into'
+      'the text box below the screen.'
+      ''
+      'The messages that you type must consist of only: letters,'
+      'commas, full stops, question marks, exclaimation marks and'
+      'spaces'
+      ''
+      'The "send" button will send the message to your friend but'
+      'can only be used if your message is encrypted.'
+      ''
+      'The "Encode/Decode Message" button can be used to '
+      'encrypt the message you are busy working on. The message '
+      'can not be changed while it is encrypted. Don'#39't worry if you'
+      'encrypt the message and then want to change it, you can '
+      'just press the button again to decrypt the message and '
+      'continue working on it.'
+      ''
+      'The "Decrypt all messages" button will decrypt all the sent '
+      'and recieved messages on your screen.')
+    ReadOnly = True
+    TabOrder = 5
+    Visible = False
+  end
+  object btnUnderstood2: TButton
+    Left = 467
+    Top = 413
+    Width = 83
+    Height = 25
+    Caption = 'I understand'
+    Enabled = False
+    TabOrder = 6
+    Visible = False
+    OnClick = btnUnderstood2Click
+  end
+end
