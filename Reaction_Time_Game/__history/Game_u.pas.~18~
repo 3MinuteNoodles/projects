@@ -1,0 +1,129 @@
+unit Game_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Memo1: TMemo;
+    btnReady: TButton;
+    btnStop: TButton;
+    lblWL: TLabel;
+    btnEasy: TButton;
+    btnMedium: TButton;
+    btnHard: TButton;
+    imgHardcore: TImage;
+    procedure btnReadyClick(Sender: TObject);
+    procedure btnStopClick(Sender: TObject);
+    procedure btnEasyClick(Sender: TObject);
+    procedure btnMediumClick(Sender: TObject);
+    procedure btnHardClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure imgHardcoreMouseEnter(Sender: TObject);
+    procedure imgHardcoreMouseLeave(Sender: TObject);
+    procedure imgHardcoreClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  Var
+    iCount, iMode: integer;
+    bReady, bBTNstop: boolean;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnEasyClick(Sender: TObject);
+begin
+ iMode := 23;
+end;
+
+procedure TForm1.btnHardClick(Sender: TObject);
+begin
+ iMode := 11;
+end;
+
+procedure TForm1.btnMediumClick(Sender: TObject);
+begin
+ iMode := 17;
+end;
+
+procedure TForm1.btnReadyClick(Sender: TObject);
+Var
+  iRandom: integer;
+begin
+  bBTNstop := False;
+
+  iCount := 0;
+  sleep(700);
+  bReady := true;
+  Memo1.Clear;
+  Repeat
+    iRandom := random(50);
+    sleep(5);
+    Application.ProcessMessages;
+  Until iRandom = 25;
+
+  bBTNstop := true;
+
+  while bReady do
+  Begin
+    inc(iCount);
+    Memo1.Lines.Add(inttostr(iCount));
+    sleep(iMode);
+    Application.ProcessMessages;
+  End;
+end;
+
+procedure TForm1.btnStopClick(Sender: TObject);
+begin
+  bReady := False;
+
+  if bBTNstop then
+  Begin
+    if (iCount >= 1) AND (iCount <= 10) then
+    Begin
+      lblWL.Caption := 'WINNER';
+    End
+    Else
+    Begin
+      lblWL.Caption := 'LOSER';
+    End;
+  End
+  Else
+   Begin
+     lblWL.Caption := 'LOSER';
+   End;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+begin
+ iMode := 23;
+ imgHardcore.Picture.LoadFromFile('peaceful.bmp');
+end;
+
+procedure TForm1.imgHardcoreClick(Sender: TObject);
+begin
+ iMode := 6;
+end;
+
+procedure TForm1.imgHardcoreMouseEnter(Sender: TObject);
+begin
+ imgHardcore.Picture.LoadFromFile('Explosion.bmp');
+end;
+
+procedure TForm1.imgHardcoreMouseLeave(Sender: TObject);
+begin
+ imgHardcore.Picture.LoadFromFile('peaceful.bmp');
+end;
+
+end.

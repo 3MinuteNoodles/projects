@@ -1,0 +1,92 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 197
+  ClientWidth = 437
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblWL: TLabel
+    Left = 8
+    Top = 156
+    Width = 57
+    Height = 13
+  end
+  object imgHardcore: TImage
+    Left = 193
+    Top = 32
+    Width = 234
+    Height = 157
+    Proportional = True
+    OnClick = imgHardcoreClick
+    OnMouseEnter = imgHardcoreMouseEnter
+    OnMouseLeave = imgHardcoreMouseLeave
+  end
+  object Memo1: TMemo
+    Left = 2
+    Top = 5
+    Width = 185
+    Height = 145
+    Hint = 'shows numbers'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+  end
+  object btnReady: TButton
+    Left = 2
+    Top = 175
+    Width = 75
+    Height = 25
+    Caption = 'Ready'
+    TabOrder = 1
+    OnClick = btnReadyClick
+  end
+  object btnStop: TButton
+    Left = 83
+    Top = 175
+    Width = 75
+    Height = 25
+    Caption = 'Stop'
+    TabOrder = 2
+    OnClick = btnStopClick
+  end
+  object btnEasy: TButton
+    Left = 193
+    Top = 0
+    Width = 75
+    Height = 25
+    Caption = 'Easy Mode'
+    TabOrder = 3
+    OnClick = btnEasyClick
+  end
+  object btnMedium: TButton
+    Left = 271
+    Top = 0
+    Width = 75
+    Height = 25
+    Caption = 'Medium Mode'
+    TabOrder = 4
+    OnClick = btnMediumClick
+  end
+  object btnHard: TButton
+    Left = 352
+    Top = 0
+    Width = 75
+    Height = 25
+    Caption = 'Hard Mode'
+    TabOrder = 5
+    OnClick = btnHardClick
+  end
+end
